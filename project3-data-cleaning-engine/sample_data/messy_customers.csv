@@ -1,0 +1,501 @@
+customer_id,full_name,email,signup_date,country,age,annual_spend,is_active,segment
+C-0001,Elena Dubois,elena.dubois1@example.com,"Nov 8, 2022",Canada,76.0,3483.14,no,Consumer
+C-0002,Ethan Nguyen,ethan.nguyen2@example.com,2021-07-05,germany,43,"1,041",yes,corporate
+C-0003,CHEN TANAKA,chen.tanaka3@example.com,2022-08-11,india ,23,"$2,349.16",N,Small  Business
+C-0004,Mateo Nguyen,mateo.nguyen4@example.com,04/28/2022,germany,73,1352.55,yes,small business
+C-0005,Ethan Tanaka,ethan.tanaka5@example.com,03.12.2024,Canada ,N/A,"3,181",Y,Corporate
+C-0006,Nina Nguyen,NINA.NGUYEN6@EXAMPLE.COM,05/04/2023,Germany,76.0,"$1,044.01",yes,Corporate
+C-0007,Ravi  Garcia,ravi.garcia7@example.com,2020-01-19,UK,49.0,1674.78,Yes,CONSUMER 
+C-0008,Mateo  Müller,mateo.muller8@example.com,"Apr 23, 2023",usa,72,"1,471",Y,Small  Business
+C-0009,Aisha Müller,aisha.muller9@example.com,2020-09-28,INDIA,78,3881.62,Y,consumer
+C-0010,Omar Garcia,OMAR.GARCIA10@EXAMPLE.COM,2024-10-24,United States,unknown,1181.21,1,small business
+C-0011,Chen Johnson ,chen.johnson11@example.com,2023-02-18,INDIA,36,"$1,826.24",1,Corporate
+C-0012,Aisha Dubois,aisha.dubois12@example.com,2025-08-28,Canada ,53,1837.83,true,Corporate
+C-0013,Elena Tanaka,elena.tanaka13@example.com,26.02.2023,india ,52,N/A,no,small business
+C-0014,Noah Rossi,noah.rossi14@example.com,06.09.2025,UK,NA,null,Yes,Corporate
+C-0015,Lucas Dubois,lucas.dubois15@example.com,22.11.2023,united kingdom,47,865.08,1,small business
+C-0016,Elena Tanaka,elena.tanaka16@example.com,-,Germany,44,"1,046",1,Corporate
+C-0017,emma kim,emma.kim17@example.com,2020-09-15,germany,61,"$1,186.32",1,Corporate
+C-0018,Liam Garcia,liam.garcia18@example.com,2022-11-01,UK,25,1448.11,1,consumer
+C-0019,Ethan O'Brien,ethan.obrien19@example.com,2023-06-20,INDIA,NA,"$2,356.38",0,Small  Business
+C-0020,Noah Ivanova,noah.ivanova20@example.com,24.12.2020,germany,24,"$1,377.24",yes,small business
+C-0021,Elena Cohen,elena.cohen21@example.com,"Jul 12, 2021",U.K.,50,"$1,317.68",true,Corporate
+C-0022,Mateo Garcia,mateo.garcia22@example.com,2022-12-06,United States,57,800.98,No,Small  Business
+C-0023,Priya Haddad,priya.haddad23@example.com,07/15/2022,india ,69,"1,435",false,small business
+C-0024,priya silva,priya.silva24@example.com,2024-05-25,germany,30,"$2,524.08",yes,corporate
+C-0025,Sofia Garcia,sofia.garcia25@example.com,07/05/2025,INDIA,21,"2,918",yes,small business
+C-0026,Jonas O'Brien,jonas.obrien26@example.com,2020-01-11,Deutschland,36,1207.69,N,Consumer
+C-0129,Aisha Smith,aisha.smith129@example.com,NA,India,29,616,true,Small  Business
+C-0027,Hana Haddad,hana.haddad27@example.com,2023-06-12,Canada,69,985000.00,0,Small Business
+C-0028,Liam Rossi,liam.rossi28@example.com,2025-03-21,United Kingdom,81,"$1,113.08",No,Consumer
+C-0029,Kofi Haddad,kofi.haddad29@example.com,23.01.2025,Deutschland,N/A,3498.42,1,Small Business
+C-0030,Aisha Tanaka,aisha.tanaka30@example.com,2024-02-18,united kingdom,41,"$7,230.65",yes,Small  Business
+C-0392,Lucas Nguyen,duplicate@example.com,2020-01-23,Canada ,75,-,N,CONSUMER 
+C-0031,Hana Müller,hana.muller31@example.com,25.11.2021,Germany,59,1216.98,N,Corporate
+C-0032,Elena O'Brien,elena.obrien32@example.com,2023-07-17,United Kingdom,18,4720.24,Y,Corporate
+C-0033,Nina Rossi,nina.rossi33@example.com,01/08/2020,INDIA,19,943.50,Y,corporate
+C-0034,Zoe Garcia,zoe.garcia34@example.com,2020-02-28,united states,37,2601.20,Y,CONSUMER 
+C-0035,Mia Tanaka,mia.tanaka35@example.com,11/20/2019,Germany,59,640.08,0,small business
+C-0036,Liam Johnson,liam.johnson36@example.com,2019-11-04,Germany,24,2054.27,true,Small  Business
+C-0037,Ethan Haddad,ethan.haddad37@example.com,2024-12-26,India,21,"1,089",false,consumer
+C-0038,Noah Silva,noah.silva38@example.com,NA,usa,43,580,true,Corporate
+C-0039,chen nguyen,-,10.08.2019,UK,60,3072.08,1,corporate
+C-0315,Sofia Nguyen,sofia.nguyen315@example.com,2022-09-24,Deutschland,N/A,"$1,750.52",1,Small  Business
+C-0040,Elena Rossi,ELENA.ROSSI40@EXAMPLE.COM,25.11.2021,united kingdom,67,4681.52,false,consumer
+C-0041,Omar Garcia,omar.garcia41@example.com,2023-03-10,Deutschland,28.0,674.51,1,CONSUMER 
+C-0042,aisha okafor,aisha.okafor42@example.com,08/23/2024,India,23,998.59,No,small business
+C-0043,Jonas Rossi,jonas.rossi43@example.com,2022-07-13, United States,unknown,null,Y,small business
+C-0044,Priya Garcia,priya.garcia44@example.com,2024-11-16,CANADA,75,1578.57,Yes,Corporate
+C-0045,Noah O'Brien,noah.obrien45@example.com,07.11.2022,UK,71,"$2,208.48",No,small business
+C-0046,PRIYA MÜLLER,priya.muller46@example.com,"Aug 16, 2022",Canada ,81,"2,196",No,Corporate
+C-0047,Ava Johnson,ava.johnson47@example.com,02/15/2025,Germany,67,1116.59,yes,consumer
+C-0048,Noah Müller,noah.muller48@example.com,2020-02-24,united states,18,"$2,090.13",no,CONSUMER 
+C-0049,Sofia Patel ,sofia.patel49@example.com,2024-08-19,Canada ,75,1461.62,true,Small Business
+C-0050,Emma Rossi,emma.rossi50@example.com,2021-09-11,Canada,34,1833.31,Y,Corporate
+C-0051,Mia Smith,mia.smith51@example.com,"Apr 8, 2020",U.K.,19,616.55,No,Corporate
+C-0052,Ava O'Brien ,ava.obrien52@example.com,2019-04-01,Canada ,74,"1,050",1,CONSUMER 
+C-0053,Zoe Dubois,ZOE.DUBOIS53@EXAMPLE.COM,N/A,India,69,426.61,true,CONSUMER 
+C-0054,Emma Kim,emma.kim54@example.com,2023-02-03,U.S.,40.0,"$1,015.59",no,Small Business
+C-0055,  Ethan Nguyen,ethan.nguyen55@example.com,2024-01-22,united kingdom,36,1883.61,true,Small Business
+C-0056,Kofi Ivanova,kofi.ivanova56@example.com,21.01.2024,India,18,NA,1,Corporate
+C-0057,Sofia Dubois,sofia.dubois57@example.com,07.05.2020, United States,44,1528.01,Y,Consumer
+C-0058,Zoe Patel,zoe.patel58@example.com,2019-01-28,Deutschland,54,943.60,No,consumer
+C-0059,Liam O'Brien,liam.obrien59@example.com,2022-10-22, United States,57,"$1,246.41",Yes,consumer
+C-0060,AISHA IVANOVA,aisha.ivanova60@example.com,2025-11-09,INDIA,25,2660.54,false,Small Business
+C-0061,Chen Patel,chen.patel61@example.com,"May 11, 2025",U.S.,37,N/A,true,Small Business
+C-0062,  Jonas Ivanova,jonas.ivanova62@example.com,13.10.2021,germany,45,1237.02,false,small business
+C-0063,Elena Müller ,elena.muller63@example.com,2019-01-28,germany,73,"$1,159.48",Y,consumer
+C-0064,Priya Silva,priya.silva64@example.com,16.09.2024,germany,68,1372.60,Yes,Small  Business
+C-0065,Hana Müller,HANA.MULLER65@EXAMPLE.COM,2020-10-22,India,25,2265.47,No,corporate
+C-0066,Ethan Johnson,ethan.johnson66@example.com,2019-11-25,India,75,322.70,0,CONSUMER 
+C-0067,  Mateo Cohen,mateo.cohen67@example.com,2022-07-11,U.S.,71,2209.13,yes,CONSUMER 
+C-0068,Ethan Nguyen,ethan.nguyen68@example.com,12/23/2020,Germany,81,1276.31,yes,small business
+C-0069,Liam Rossi,liam.rossi69@example.com,27.01.2022,United Kingdom,23,"1,991",Y,Corporate
+C-0070,Elena  Johnson,elena.johnson70@example.com,02/21/2025,UK,37,1074.54,yes,small business
+C-0071,Kofi Haddad,kofi.haddad71@example.com,,germany,58,$603.59,Y,corporate
+C-0072,Ravi Haddad,ravi.haddad72@example.com,2022-06-23,india ,73,331.85,0,corporate
+C-0073,Nina Cohen,nina.cohen73@example.com,2019-10-27,united states,unknown,2632.17,Y,Corporate
+C-0074,Zoe Kim,zoe.kim74@example.com,2019-08-03,United Kingdom,20,"$1,158.52",Yes,Consumer
+C-0075,Liam Cohen,liam.cohen75@example.com,,U.K.,34,625.31,1,Corporate
+C-0076,jonas smith,jonas.smith76@example.com,"Feb 16, 2019", United States,78,"$1,388.03",yes,corporate
+C-0077,Elena Cohen,elena.cohen77@example.com,2020-09-17,U.K.,57,"$1,898.21",No,Corporate
+C-0078,Priya  Haddad,priya.haddad78@example.com,2021-08-22,United Kingdom,41,$348.18,Yes,Corporate
+C-0079,Mia Cohen,mia.cohen79@example.com,06/01/2022,usa,51,843.50,1,Small  Business
+C-0080,Mateo Rossi,mateo.rossi80@example.com,09/19/2024,U.K.,57,902.61,yes,Small Business
+C-0081,Elena Rossi,elena.rossi81@example.com,2025-08-28,USA,42,4110.74,0,corporate
+C-0082,Elena  Ivanova,elena.ivanova82@example.com,05.11.2022,India,60,4763.94,no,Small  Business
+C-0083,Nina Smith ,NINA.SMITH83@EXAMPLE.COM,2021-03-28,india ,37,"$2,478.61",no,consumer
+C-0084,Nina O'Brien,nina.obrien84@example.com,06.09.2023,Germany,57,280.17,N,corporate
+C-0245,Lucas Dubois,lucas.dubois245@example.com,2025-07-21,usa,999,"$1,381.47",yes,Corporate
+C-0085,Hana Cohen,hana.cohen85@example.com,19.06.2020,Germany,19,"3,190",Yes,Corporate
+C-0086,Nina Nguyen,nina.nguyen86@example.com,2025-11-01,INDIA,70,2933.64,true,CONSUMER 
+C-0087,Mateo Johnson,mateo.johnson87@example.com,2019-07-15,INDIA,47,767.51,true,CONSUMER 
+C-0088,LUCAS KIM,lucas.kim88@example.com,2019-12-11,CANADA,82,NA,Y,corporate
+C-0089,Mateo O'Brien,mateo.obrien89@example.com,07/13/2025,U.K.,null,"1,851",true,corporate
+C-0090,  Mateo Dubois,mateo.dubois90@example.com,"Sep 23, 2024",India,46,"$2,316.28",Y,Corporate
+C-0091,  Mateo Nguyen,mateo.nguyen91@example.com,2019-03-06,Canada ,33,210.21,yes,small business
+C-0092,Priya Okafor,priya.okafor92@example.com,2022-11-01,Deutschland,64,-,Y,small business
+C-0093,Kofi Müller,kofi.muller93@example.com,2021-09-09,USA,50,null,No,Corporate
+C-0094,Ava O'Brien ,ava.obrien94@example.com,2019-04-14,United Kingdom,49,1617.64,true,Consumer
+C-0095,Nina Nguyen,nina.nguyen95@example.com,2023-04-09,USA,19,1108.37,No,Small Business
+C-0096,Aisha Nguyen,aisha.nguyen96@example.com,"Aug 9, 2024",united kingdom,32,1764.08,1,Small  Business
+C-0097,Emma Müller,emma.muller97@example.com,"Nov 9, 2020",United Kingdom,42,804.85,Y,CONSUMER 
+C-0098,Sofia Garcia,sofia.garcia98@example.com,06/10/2021,UK,22,"3,707",N,corporate
+C-0099,Sofia Müller,sofia.muller99@example.com,2022-08-04,United States,27,1128.97,yes,small business
+C-0100,Mia Silva,mia.silva100@example.com,2020-08-07,USA,27,1070.98,1,CONSUMER 
+C-0101,Kofi Haddad,kofi.haddad101@example.com,2025-11-20,INDIA,29,703.82,Y,Corporate
+C-0102,aisha tanaka,aisha.tanaka102@example.com,07.09.2020,U.K.,18,"$1,488.01",Y,Corporate
+C-0103,Ravi Smith,ravi.smith103@example.com,2024-06-18,Canada,64,2270.37,Y,Corporate
+C-0104,ETHAN PATEL,ethan.patel104@example.com,"Oct 22, 2023",INDIA,75,660,no,CONSUMER 
+C-0459,Hana Müller,hana.muller459@example.com,2021-02-14,usa,58,2688.88,Y,Corporate
+C-0025,Sofia Garcia,SOFIA.GARCIA25@EXAMPLE.COM,07/05/2025,INDIA,21,"2,918",N,small business
+C-0105,Sofia Rossi ,sofia.rossi105@example.com,2020-09-24,united kingdom,77,1458.69,Yes,Corporate
+C-0106,Zoe Patel,zoe.patel106@example.com,2020-04-03,Germany,71,971,Y,small business
+C-0107,Ravi Müller,ravi.muller107@example.com,null,Canada,unknown,1160.52,true,corporate
+C-0090,  Mateo Dubois,mateo.dubois90@example.com,"Sep 23, 2024",India,46,"$2,316.28",Y,Corporate
+C-0108,Ravi Haddad,ravi.haddad108@example.com,2021-05-03,Deutschland,44,"3,274",1,CONSUMER 
+C-0109,Jonas Müller,jonas.muller109@example.com,2021-03-23,United Kingdom,59,"$1,390.90",true,Corporate
+C-0110,Sofia Ivanova,sofia.ivanova110@example.com,08/03/2025,usa,36,2414.36,N,small business
+C-0111,Liam Patel,liam.patel111@example.com,"Jul 6, 2024",usa,25,1217.75,1,Small Business
+C-0112,Jonas Garcia,jonas.garcia112@example.com,11/13/2023,India,50,1784.94,Y,Small  Business
+C-0113,Mateo Rossi,mateo.rossi113@example.com,05/25/2022,Deutschland,46,"1,047",1,Small Business
+C-0114,  Omar Okafor,omar.okafor114@example.com,NA, United States,unknown,450.54,no,Small  Business
+C-0115,Jonas Müller,jonas.muller115@example.com,2022-03-11,germany,64.0,2269.41,0,small business
+C-0116,Ravi Dubois,ravi.dubois116@example.com,2024-04-15,INDIA,63,"$1,744.65",1,Small  Business
+C-0117,Zoe Johnson,zoe.johnson117@example.com,08.02.2023,india ,70,812.86,yes,corporate
+C-0118,Priya Dubois,priya.dubois118@example.com,02/12/2023,U.S.,58,"1,217",yes,Corporate
+C-0119,Sofia  Cohen,sofia.cohen119@example.com,null,Canada,56,1102.27,0,Corporate
+C-0120,Priya Kim,priya.kim120@example.com,2020-07-21,germany,unknown,990.94,0,Consumer
+C-0121,Priya Nguyen,priya.nguyen121@example.com,2020-06-25,India,74,920.81,1,Corporate
+C-0122,Noah Tanaka,noah.tanaka122@example.com,"May 9, 2023",india ,49,$855.99,Y,Small Business
+C-0371,Liam Cohen,liam.cohen371@example.com,09/14/2023,United States,19,"$1,012.08",Yes,Consumer
+C-0123,Noah Nguyen,noah.nguyen123@example.com,2024-09-11,Germany,69,NA,yes,Small Business
+C-0124,Noah Rossi,noah.rossi124@example.com,2025-02-23,germany,unknown,854.76,No,Consumer
+C-0125,Zoe Kim,zoe.kim125@example.com,2019-02-21,Germany,37,959.41,no,Corporate
+C-0126,Hana Silva,,-,CANADA,76,1957.60,N,Small Business
+C-0127,Ravi Dubois,,"May 5, 2019",India,37,321.88,yes,corporate
+C-0128,Emma Johnson,emma.johnson128@example.com,06/22/2024,germany,19,512.97,Y,Corporate
+C-0129,Aisha Smith,aisha.smith129@example.com,NA,India,29,616,true,Small  Business
+C-0130,Aisha Smith,aisha.smith130@example.com,08.07.2025,United States,56,NA,Yes,Corporate
+C-0131,Aisha Tanaka,AISHA.TANAKA131@EXAMPLE.COM,2020-12-12,Germany,54,1002.14,false,CONSUMER 
+C-0132,Mia Nguyen,mia.nguyen132@example.com,2025-03-06,usa,68,"$3,183.10",no,small business
+C-0133,JONAS KIM,jonas.kim133@example.com,2025-11-18,Deutschland,56,"$1,845.59",Yes,Corporate
+C-0134,Lucas Ivanova,LUCAS.IVANOVA134@EXAMPLE.COM,2024-05-14,Germany,49,$478.13,true,Corporate
+C-0135,Liam  Garcia,LIAM.GARCIA135@EXAMPLE.COM,2024-02-16,germany,58,$743.19,No,Small Business
+C-0136,Priya Kim,priya.kim136@example.com,03/15/2022,Canada,49,1323.52,N,corporate
+C-0137,Sofia Garcia,sofia.garcia137@example.com,2020-04-15,U.S.,150,1396.66,Y,corporate
+C-0138,Sofia Smith,sofia.smith138@example.com,2019-03-07,INDIA,68,1679.31,No,consumer
+C-0139,Ravi Dubois,ravi.dubois139@example.com,2025-02-19,United Kingdom,38,1663.72,true,small business
+C-0140,mateo smith,mateo.smith140@example.com,12/24/2025,CANADA,-,null,no,corporate
+C-0141,Aisha Dubois,aisha.dubois141@example.com,2019-12-09,Germany,77,$943.91,true,Small  Business
+C-0142,  Jonas Haddad,JONAS.HADDAD142@EXAMPLE.COM,2022-10-24,United States,53,"1,033",1,corporate
+C-0143,Mia Patel,MIA.PATEL143@EXAMPLE.COM,2019-01-25,UK,-,609,Yes,Consumer
+C-0144,Mateo Cohen ,-,04/09/2019,united kingdom,64,1171.23,Yes,CONSUMER 
+C-0145,  Mateo Cohen,mateo.cohen145@example.com,"Sep 3, 2019",United Kingdom,79,1379.19,true,corporate
+C-0146,Nina Garcia,nina.garcia146@example.com,2022-01-16,usa,66,545.95,Y,corporate
+C-0147,Nina Müller,nina.muller147@example.com,2020-01-03,CANADA,58,698,true,Corporate
+C-0148,Priya Kim,-,2022-11-26,germany,45,"$1,696.36",true,Corporate
+C-0149,Liam Garcia,LIAM.GARCIA149@EXAMPLE.COM,2022-05-26,germany,65,1879.70,Yes,CONSUMER 
+C-0150,Noah Garcia,noah.garcia150@example.com,2020-02-04,Canada,49,-,false,CONSUMER 
+C-0151,Emma Ivanova,emma.ivanova151@example.com,2019-11-06, United States,68,3787.56,1,corporate
+C-0152,Elena Johnson,elena.johnson152@example.com,05.01.2020,India,66,813,Yes,consumer
+C-0153,Elena Johnson,ELENA.JOHNSON153@EXAMPLE.COM,2020-01-23,india ,70,null,0,CONSUMER 
+C-0154,Aisha Ivanova,aisha.ivanova154@example.com,"Jun 11, 2019",Canada ,54,717,0,Corporate
+C-0155,Zoe Nguyen ,zoe.nguyen155@example.com,2024-07-08,united kingdom,33,"1,437",yes,consumer
+C-0156,Mia Cohen,mia.cohen156@example.com,05.12.2020,INDIA,34,"$1,042.98",Y,consumer
+C-0157,Noah Silva,noah.silva157@example.com,2019-12-05,UK,54.0,"1,662",No,small business
+C-0158,Nina Okafor,nina.okafor158@example.com,01/05/2023,Canada,35,2369.63,1,small business
+C-0159,Kofi Rossi,kofi.rossi159@example.com,"May 16, 2024",united kingdom,53,"1,744",N,Small Business
+C-0160,Zoe Silva,zoe.silva160@example.com,"Oct 2, 2024",CANADA,57,1016.09,yes,consumer
+C-0161,Emma Kim,emma.kim161@example.com,24.10.2021,india ,69,1139.80,no,corporate
+C-0162,Priya Garcia,priya.garcia162@example.com,"Sep 8, 2023",Canada ,65,1042.43,no,small business
+C-0163,Noah Johnson,noah.johnson163@example.com,2019-07-10,Canada,59,2812.84,Y,small business
+C-0164,Elena Tanaka,elena.tanaka164@example.com,2023-12-19,united kingdom,27,$974.23,1,consumer
+C-0165,Emma Cohen,emma.cohen165@example.com,2021-12-15,India,75,460,false,consumer
+C-0166,Emma Garcia,emma.garcia166@example.com,2020-06-11,United Kingdom,80,$573.76,false,CONSUMER 
+C-0167,Zoe Dubois,zoe.dubois167@example.com,2022-09-06,INDIA,49,743,no,CONSUMER 
+C-0168,Ethan Ivanova,ethan.ivanova168@example.com,"Feb 11, 2021",Canada ,32,2652.40,true,Small  Business
+C-0169,Priya Haddad ,NA,2019-02-20,india ,66,,Y,Corporate
+C-0170,Ravi Rossi,ravi.rossi170@example.com,2024-01-01,Germany,unknown,1293.00,1,small business
+C-0171,Omar Cohen,omar.cohen171@example.com,01.11.2023,usa,30,"2,006",true,Small Business
+C-0172,Ava Smith,ava.smith172@example.com,2020-09-12,Canada,19,1147.42,true,Corporate
+C-0173,Elena Kim,elena.kim173@example.com,2020-11-04,INDIA,76,1294.89,Yes,Small  Business
+C-0174,Ava Tanaka,ava.tanaka174@example.com,28.10.2023,India,68,"$3,685.49",Y,consumer
+C-0175,Ravi Kim ,ravi.kim175@example.com,02.05.2024,United States,-,1558.98,Yes,CONSUMER 
+C-0176,Ava Nguyen,ava.nguyen176@example.com,2023-01-09,India,58,"$2,686.02",no,Consumer
+C-0177,Priya Nguyen,priya.nguyen177@example.com,03/11/2025,Canada ,43,1241.73,0,small business
+C-0396,Sofia Nguyen,SOFIA.NGUYEN396@EXAMPLE.COM,2021-12-08,United Kingdom,21,"$1,343.67",false,Small Business
+C-0178,aisha smith,aisha.smith178@example.com,2024-05-11,india ,48,2344.76,no,Small Business
+C-0179,Sofia Cohen,sofia.cohen179@example.com,NA,Canada,70,2737.63,true,Corporate
+C-0180,Zoe Okafor,ZOE.OKAFOR180@EXAMPLE.COM,-,U.K.,69,"$1,231.30",Yes,Corporate
+C-0181,hana johnson,hana.johnson181@example.com,2023-02-21,Canada,45,2525.04,1,small business
+C-0182,  Chen Dubois,chen.dubois182@example.com,2019-09-20, United States,48,959.36,true,Corporate
+C-0183,Hana Kim,hana.kim183@example.com,24.05.2020,Deutschland,82,803.68,true,Small  Business
+C-0184,Ava O'Brien,null,2025-09-02,U.S.,32,4202.84,Yes,consumer
+C-0185,Jonas Garcia,jonas.garcia185@example.com,2020-03-25,United States,42,728.94,true,small business
+C-0186,Omar Nguyen ,,2022-04-09,CANADA,25,$908.02,No,small business
+C-0187,Kofi Haddad ,kofi.haddad187@example.com,01/18/2020,Deutschland,41,514.92,true,CONSUMER 
+C-0188,Aisha Dubois,N/A,08/18/2020,united kingdom,53,$709.06,yes,Small  Business
+C-0189,Ravi  Dubois,,2020-02-04,CANADA,39,$491.83,0,Consumer
+C-0190,Jonas Kim,jonas.kim190@example.com,06.11.2023,CANADA,45,1151.44,no,corporate
+C-0191,elena o'brien,elena.obrien191@example.com,2025-11-22,Deutschland,82,"2,094",false,consumer
+C-0192,Omar Kim,omar.kim192@example.com,2021-11-11,UK,null,"$1,102.38",Y,Consumer
+C-0193,Elena Nguyen,elena.nguyen193@example.com,02/07/2024,Deutschland,66,5210.53,true,Corporate
+C-0194,Ravi Smith,ravi.smith194@example.com,06/15/2025,India,39,524,1,corporate
+C-0195,Lucas Okafor ,lucas.okafor195@example.com,2023-05-16,united states,18,-,no,Corporate
+C-0196,Aisha Okafor ,aisha.okafor196@example.com,27.02.2019,germany,70,1035.73,Yes,Consumer
+C-0197,Ethan Dubois ,ethan.dubois197@example.com,2019-07-19,United States,25,"$2,388.55",Yes,Small Business
+C-0198,Mia Nguyen,mia.nguyen198@example.com,02.01.2024,germany,48,"1,684",true,Consumer
+C-0199,Ravi Ivanova,ravi.ivanova199@example.com,2020-04-07,United States,43,1137.43,true,small business
+C-0200,Priya Garcia,,2020-12-09,India,48,"$1,001.60",0,small business
+C-0201,Chen Dubois,chen.dubois201@example.com,18.06.2021,india ,67,630,no,consumer
+C-0202,priya patel,priya.patel202@example.com,12/08/2024,united states,43,-,true,Consumer
+C-0203,Nina Smith,NINA.SMITH203@EXAMPLE.COM,2022-01-20,Canada,51,"$1,515.37",Yes,Consumer
+C-0204,Aisha Nguyen,aisha.nguyen204@example.com,01/23/2020,Deutschland,-,1797.89,Y,Small  Business
+C-0205,Aisha Tanaka,aisha.tanaka205@example.com,2023-01-07,INDIA,40,NA,yes,Small Business
+C-0206,Zoe Nguyen,zoe.nguyen206@example.com,2025-11-07, United States,74,$818.46,Y,corporate
+C-0207,  Chen Rossi,chen.rossi207@example.com,06/19/2020,india ,58,881.70,true,corporate
+C-0208,Mia Smith,mia.smith208@example.com,11.04.2024,United States,29.0,$943.59,yes,Small Business
+C-0209,Emma Patel,EMMA.PATEL209@EXAMPLE.COM,2021-02-26,U.S.,19,894,true,corporate
+C-0210,Noah Nguyen,noah.nguyen210@example.com,-,United Kingdom,51,2216.89,yes,small business
+C-0211,Emma Tanaka,emma.tanaka211@example.com,09/09/2024,CANADA,34.0,"$1,230.80",No,Corporate
+C-0212,Chen Okafor,chen.okafor212@example.com,2025-01-03,Germany,30,"$1,088.29",yes,small business
+C-0213,Mateo Haddad,mateo.haddad213@example.com,-,United Kingdom,68,"2,860",1,corporate
+C-0214,RAVI TANAKA,ravi.tanaka214@example.com,N/A,germany,55,1556.50,false,Small Business
+C-0215,Aisha Rossi,aisha.rossi215@example.com,"Sep 27, 2019",CANADA,67,"$1,393.23",no,small business
+C-0216,Aisha Patel,aisha.patel216@example.com,2025-01-10,INDIA,77,2711.14,true,CONSUMER 
+C-0217,Elena Kim,elena.kim217@example.com,2021-07-05,United Kingdom,76,806.28,Y,Small  Business
+C-0218,Noah Silva,noah.silva218@example.com,2025-07-07,U.K.,71,1778.20,Yes,Small  Business
+C-0219,Omar  Johnson,omar.johnson219@example.com,"Aug 27, 2021",united kingdom,N/A,$670.35,Yes,Small  Business
+C-0220,Ethan Cohen,ethan.cohen220@example.com,"Apr 25, 2025",india ,62,927.24,1,Consumer
+C-0221,Jonas Tanaka,JONAS.TANAKA221@EXAMPLE.COM,10.09.2025,CANADA,55,$699.32,No,Small  Business
+C-0222,AISHA DUBOIS,aisha.dubois222@example.com,09/20/2025,UK,72,861,1,Small Business
+C-0223,  Nina Cohen,,2023-07-17,united states,51,945,false,Consumer
+C-0224,Mia Tanaka,MIA.TANAKA224@EXAMPLE.COM,03/14/2022,India,31,"1,961",1,Small Business
+C-0225,Mateo Silva ,mateo.silva225@example.com,2021-01-14,India,55.0,"$2,107.13",yes,CONSUMER 
+C-0226,  Mateo Cohen,mateo.cohen226@example.com,"Feb 26, 2024",Deutschland,61,-,false,corporate
+C-0227,Ravi Dubois,ravi.dubois227@example.com,"Mar 3, 2020",UK,33,579,yes,Corporate
+C-0228,Ava Okafor,ava.okafor228@example.com,01/08/2023,United Kingdom,43,"$2,099.12",1,CONSUMER 
+C-0325,Liam Dubois,LIAM.DUBOIS325@EXAMPLE.COM,05/25/2023,India,77,976.95,No,consumer
+C-0229,Chen Dubois,chen.dubois229@example.com,2024-10-15,united states,32.0,1426.51,N,CONSUMER 
+C-0230,Elena Nguyen,elena.nguyen230@example.com,"Dec 15, 2021",usa,25,1071.53,Yes,Small  Business
+C-0231,Ava Garcia,ava.garcia231@example.com,2025-04-12,Canada,72,"3,047",Y,small business
+C-0232,Liam Haddad,liam.haddad232@example.com,2023-07-06,united states,51,1758.73,N,Corporate
+C-0233,Lucas Müller,lucas.muller233@example.com,2021-07-11,U.K.,72,923,1,small business
+C-0234,Mia Okafor,-,2025-02-12,UK,80,NA,true,Corporate
+C-0235,Ava Rossi,ava.rossi235@example.com,25.05.2022,United States,20,1390.56,yes,Corporate
+C-0236,Kofi Dubois,kofi.dubois236@example.com,2019-07-04,U.S.,56,"$1,229.39",No,small business
+C-0237,Ethan Dubois,ethan.dubois237@example.com,"Aug 24, 2024", United States,74,"$1,250,000.00",N,Consumer
+C-0238,NINA O'BRIEN,nina.obrien238@example.com,2022-06-02,UK,57,349.73,true,Corporate
+C-0239,Mia Silva,mia.silva239@example.com,2025-04-09, United States,52,1433.62,yes,CONSUMER 
+C-0240,Emma Nguyen,emma.nguyen240@example.com,08/12/2025,CANADA,60,"$1,212.72",true,Small  Business
+C-0241,Omar Tanaka,omar.tanaka241@example.com,11/28/2019,UK,31,543.65,Y,Consumer
+C-0242,hana tanaka,hana.tanaka242@example.com,02/01/2023,United Kingdom,29,958.97,N,consumer
+C-0243,Mateo Tanaka,mateo.tanaka243@example.com,11/22/2025,INDIA,58,"$1,269.11",N,Small  Business
+C-0244,  Emma Dubois,emma.dubois244@example.com,2021-05-12,united kingdom,63,1231.18,yes,corporate
+C-0245,Lucas Dubois,lucas.dubois245@example.com,2025-07-21,usa,999,"$1,381.47",yes,Corporate
+C-0246,Lucas  Johnson,,01/08/2019,India,48.0,1040.58,true,Small Business
+C-0247,Emma Silva,emma.silva247@example.com,02/16/2022,UK,75,1261.51,true,Small  Business
+C-0248,Jonas Smith,jonas.smith248@example.com,2020-05-15,CANADA,52.0,$890.86,true,consumer
+C-0249,Kofi Garcia,kofi.garcia249@example.com,2021-09-12,united states,30,618.98,1,corporate
+C-0250,Chen Silva,chen.silva250@example.com,2019-08-16,india ,null,2173.74,yes,Corporate
+C-0251,Sofia Dubois,sofia.dubois251@example.com,2023-08-06,Canada,74,-,Y,Corporate
+C-0252,Nina Rossi,-,"Jul 24, 2021",USA,61,1502.15,Yes,Corporate
+C-0253,MATEO IVANOVA,mateo.ivanova253@example.com,2023-07-20,INDIA,36,739.86,no,consumer
+C-0254,Liam Garcia,NA,2019-10-21,INDIA,66,883.09,true,consumer
+C-0255,Omar Kim,omar.kim255@example.com,"Aug 26, 2022",United Kingdom,57,2493.61,Yes,consumer
+C-0256,Priya Johnson,priya.johnson256@example.com,2021-10-18,united kingdom,34,553.83,N,consumer
+C-0077,Elena Cohen,ELENA.COHEN77@EXAMPLE.COM,2020-09-17,U.K.,57,"$1,898.21",Y,Corporate
+C-0327,Lucas Haddad,LUCAS.HADDAD327@EXAMPLE.COM,08.01.2022,usa,63,"$1,579.48",No,corporate
+C-0257,  Ravi Müller,ravi.muller257@example.com,"Sep 26, 2025",Canada,26,"$1,031.33",Y,consumer
+C-0258,Mia Garcia,mia.garcia258@example.com,"Jul 20, 2024",germany,49,$804.72,0,consumer
+C-0259,  Elena Silva,elena.silva259@example.com,2021-01-17,usa,79,"$1,081.84",Yes,small business
+C-0260,Omar Garcia,-,2019-08-02,germany,35,"$1,458.67",true,Small Business
+C-0261,Omar Okafor,omar.okafor261@example.com,05.01.2022,INDIA,63,1754.89,No,Small  Business
+C-0262,Mateo Ivanova,mateo.ivanova262@example.com,2021-03-20,USA,52,"$2,266.63",1,small business
+C-0263,Lucas Okafor,lucas.okafor263@example.com,08.07.2023,Canada,25,"$1,345.53",1,Small Business
+C-0264,Ravi Müller,ravi.muller264@example.com,2020-08-17,INDIA,74,433.46,1,corporate
+C-0265,priya silva,priya.silva265@example.com,,Canada ,74,3714.39,yes,corporate
+C-0266,Omar Dubois,omar.dubois266@example.com,11/06/2021,germany,38,"1,312",0,Corporate
+C-0267,liam dubois,liam.dubois267@example.com,17.11.2024,germany,64,690.80,Y,Small Business
+C-0268,Noah Dubois,NA,2019-02-15,USA,NA,$332.31,yes,Small Business
+C-0269,  Ethan Nguyen,ethan.nguyen269@example.com,2020-03-23,U.K.,,1412.37,true,Small Business
+C-0270,Ethan Kim,ethan.kim270@example.com,2024-08-13,U.S.,70,,Y,small business
+C-0271,Ravi Tanaka,ravi.tanaka271@example.com,2025-03-15,Canada ,24,"$2,773.98",1,corporate
+C-0272,Ravi Cohen,ravi.cohen272@example.com,11/10/2024,United Kingdom,46,903.93,yes,Small Business
+C-0273,Jonas Garcia,NA,2023-02-07,United States,50,1189.33,Y,Small  Business
+C-0274,Omar Müller,omar.muller274@example.com,2023-01-20,Deutschland,79.0,"$1,808.09",true,Small  Business
+C-0275,Zoe Müller,zoe.muller275@example.com,07/09/2022,Germany,39,1572.94,false,Small  Business
+C-0276,Zoe Rossi ,zoe.rossi276@example.com,2024-05-18,united states,68,1348.17,false,consumer
+C-0277,Nina Silva,nina.silva277@example.com,2022-08-06,Deutschland,46,$943.18,0,consumer
+C-0278,Mia Rossi,mia.rossi278@example.com,2019-07-21,CANADA,unknown,,1,corporate
+C-0279,Chen Smith,chen.smith279@example.com,2025-04-26,Canada ,35,"$4,731.49",0,Corporate
+C-0280,Chen Okafor,chen.okafor280@example.com,25.07.2019,Deutschland,30,3470.60,N,corporate
+C-0001,Elena Dubois,elena.dubois1@example.com,"Nov 8, 2022",Canada,76.0,3483.14,no,Consumer
+C-0281,Sofia O'Brien ,sofia.obrien281@example.com,2022-11-06,united kingdom,29,398.02,No,consumer
+C-0282,Ravi Garcia,ravi.garcia282@example.com,2022-07-26,India,70,3541.60,1,corporate
+C-0283,noah silva,noah.silva283@example.com,2020-08-28,United States,NA,862.66,false,Consumer
+C-0284,Nina  Dubois,N/A,2025-09-02,united states,79,1721.74,Y,Corporate
+C-0285,Lucas Cohen,lucas.cohen285@example.com,04/18/2023,CANADA,76,"$2,420.29",true,corporate
+C-0286,Zoe Dubois,zoe.dubois286@example.com,01/22/2021, United States,57,965.78,yes,Small  Business
+C-0287,Ethan Smith,ETHAN.SMITH287@EXAMPLE.COM,04/08/2022,CANADA,67,2664.89,1,Consumer
+C-0288,Jonas Smith,jonas.smith288@example.com,2020-03-20,UK,50,632.75,0,consumer
+C-0289,Mateo Smith,null,2021-05-03,Germany,79,"$1,828.68",0,consumer
+C-0290,NINA O'BRIEN,,2020-06-14,U.K.,33,NA,0,Small Business
+C-0291,Jonas Okafor,jonas.okafor291@example.com,02/15/2020,CANADA,63,1969.84,yes,small business
+C-0292,priya ivanova,NA,2020-11-09,Germany,36,2024.16,yes,Consumer
+C-0293,Lucas Garcia,lucas.garcia293@example.com,null,Canada ,37,1384.96,true,Small Business
+C-0294,Mia Rossi,mia.rossi294@example.com,2024-11-19,United States,29.0,"2,292",true,Consumer
+C-0295,Elena O'Brien,elena.obrien295@example.com,2019-04-25,india ,41,1299.47,1,consumer
+C-0296,Ava Silva,ava.silva296@example.com,09.02.2024,Germany,24,null,0,CONSUMER 
+C-0297,Mateo Okafor,mateo.okafor297@example.com,12.11.2019,Deutschland,22,$571.50,true,Corporate
+C-0298,Aisha Smith,null,N/A, United States,40,"1,244",Yes,corporate
+C-0299,Hana Tanaka,hana.tanaka299@example.com,19.11.2025,United Kingdom,66,N/A,N,corporate
+C-0300,Zoe Haddad,zoe.haddad300@example.com,08/22/2019,united kingdom,54,-,No,Small Business
+C-0301,Ava Ivanova,ava.ivanova301@example.com,09/09/2025,Deutschland,N/A,"$2,605.46",Yes,CONSUMER 
+C-0302,Mia Kim,mia.kim302@example.com,08/11/2019,Canada,60,1905.21,Y,Small  Business
+C-0303,Emma Rossi,emma.rossi303@example.com,2023-04-23,Canada ,35,636.06,no,Corporate
+C-0304,  Ethan Dubois,ethan.dubois304@example.com,2023-03-18,United Kingdom,73,483.71,1,CONSUMER 
+C-0305,Zoe Kim,zoe.kim305@example.com,2021-08-08,Canada ,40,$923.34,true,corporate
+C-0306,Priya Johnson,priya.johnson306@example.com,"Mar 8, 2019",germany,62,3103.62,Y,small business
+C-0307,Hana Kim,hana.kim307@example.com,2021-09-17,UK,58,1817.58,1,corporate
+C-0308,Chen Ivanova,chen.ivanova308@example.com,2019-12-08,USA,47,3316.45,No,Corporate
+C-0309,Mia Patel,mia.patel309@example.com,2021-05-09,usa,22,"1,083",true,corporate
+C-0310,Ava Patel,ava.patel310@example.com,"Apr 4, 2022",Germany,61,"$1,399.34",1,Small Business
+C-0311,Emma O'Brien,EMMA.OBRIEN311@EXAMPLE.COM,"Oct 28, 2022",INDIA,71,null,No,Small Business
+C-0312,Elena Rossi,elena.rossi312@example.com,2020-03-11,United Kingdom,48,null,yes,Small Business
+C-0313,  Zoe Johnson,zoe.johnson313@example.com,2021-01-07,Germany,56,"$1,437.93",Yes,Corporate
+C-0314,Ava Okafor,ava.okafor314@example.com,2022-07-09,germany,33,$602.64,Yes,CONSUMER 
+C-0315,Sofia Nguyen,sofia.nguyen315@example.com,2022-09-24,Deutschland,N/A,"$1,750.52",1,Small  Business
+C-0316,Elena Haddad,ELENA.HADDAD316@EXAMPLE.COM,03/26/2020,U.K.,53.0,2933.26,true,CONSUMER 
+C-0317,Ravi Dubois,ravi.dubois317@example.com,2021-05-05,U.S.,null,1118.56,N,Small Business
+C-0318,Nina Kim,nina.kim318@example.com,2024-03-19,india ,78,1433.18,1,corporate
+C-0319,Kofi Tanaka,kofi.tanaka319@example.com,2021-07-11,CANADA,58,1538.24,false,Corporate
+C-0320,Chen Patel,chen.patel320@example.com,"Jan 4, 2025",USA,64,647.04,yes,consumer
+C-0321,Ravi  Silva,ravi.silva321@example.com,04/09/2025,Germany,67,865.67,1,corporate
+C-0322,Priya Smith,priya.smith322@example.com,2022-12-22,U.K.,52,464.00,Y,CONSUMER 
+C-0323,Jonas Tanaka,jonas.tanaka323@example.com,2019-10-03,Canada,33,1033.44,Y,Small  Business
+C-0324,Noah Kim,noah.kim324@example.com,2020-04-21,india ,77,1274.53,1,CONSUMER 
+C-0325,Liam Dubois,liam.dubois325@example.com,05/25/2023,India,77,976.95,Yes,consumer
+C-0326,Mia  Müller,mia.muller326@example.com,2024-02-25,U.K.,72,518.26,1,consumer
+C-0030,Aisha Tanaka,AISHA.TANAKA30@EXAMPLE.COM,2024-02-18,united kingdom,41,"$7,230.65",no,Small  Business
+C-0327,Lucas Haddad,lucas.haddad327@example.com,08.01.2022,usa,63,"$1,579.48",1,corporate
+C-0328,Nina Johnson,nina.johnson328@example.com,2019-06-28,Germany,80,886.27,no,consumer
+C-0329,Sofia Garcia,sofia.garcia329@example.com,2022-03-27,Canada ,72,3804.70,0,Consumer
+C-0330,Chen Ivanova,chen.ivanova330@example.com,23.02.2025,Canada,71,$632.36,false,Small  Business
+C-0331,Aisha Ivanova ,aisha.ivanova331@example.com,2020-03-15,United Kingdom,37,2749.15,Y,Small  Business
+C-0332,ZOE SILVA,zoe.silva332@example.com,02.01.2024,Canada,30,923.55,Y,small business
+C-0333,Hana Garcia,NA,2022-02-25,germany,51,"$1,595.31",Y,small business
+C-0334,Aisha Patel,aisha.patel334@example.com,2023-06-05,usa,78,"2,429",1,Small Business
+C-0335,Sofia Garcia,sofia.garcia335@example.com,2023-03-01,Canada,65,661.60,Y,Small Business
+C-0336,Ava Smith,AVA.SMITH336@EXAMPLE.COM,23.10.2024,U.S.,66,1056.91,1,Small Business
+C-0337,Mia Cohen,mia.cohen337@example.com,05/26/2021,united kingdom,67,1062.41,Yes,corporate
+C-0338,Jonas Rossi,jonas.rossi338@example.com,2025-02-09,CANADA,29,977.26,No,consumer
+C-0020,Noah Ivanova,noah.ivanova20@example.com,24.12.2020,germany,24,"$1,377.24",yes,small business
+C-0339,Omar Tanaka,,N/A,CANADA,unknown,$735.05,Y,Small  Business
+C-0340,Mia Rossi,mia.rossi340@example.com,2023-02-07,Canada,82,"$1,887.21",no,Corporate
+C-0341,Ravi Tanaka,N/A,2019-04-23,INDIA,unknown,2119.41,Yes,corporate
+C-0342,Noah Dubois,noah.dubois342@example.com,03/18/2021,Canada ,N/A,1266.41,true,Corporate
+C-0343,Mateo Ivanova,MATEO.IVANOVA343@EXAMPLE.COM,2023-01-14,UK,27,$714.11,Yes,Corporate
+C-0344,  Chen Smith,chen.smith344@example.com,2021-10-17,united kingdom,21,,true,consumer
+C-0238,NINA O'BRIEN,nina.obrien238@example.com,2022-06-02,UK,57,349.73,true,Corporate
+C-0345,Emma Garcia,emma.garcia345@example.com,02.02.2024,india ,-3,511,Yes,Consumer
+C-0346,AISHA NGUYEN,aisha.nguyen346@example.com,2019-05-21,U.K.,50,994.10,true,small business
+C-0347,Priya Garcia ,priya.garcia347@example.com,20.07.2021,Germany,21,918.51,1,CONSUMER 
+C-0348,Lucas Smith,lucas.smith348@example.com,"Jan 18, 2020",UK,46,"$1,744.93",true,Consumer
+C-0349,Priya Müller,priya.muller349@example.com,08/09/2020,india ,36,$918.50,yes,corporate
+C-0350,Mateo  Kim,,2023-12-14,Germany,,1065.92,false,Consumer
+C-0351,Zoe Silva,zoe.silva351@example.com,2020-05-11,UK,79,1415.85,Yes,Corporate
+C-0352,Jonas Patel,jonas.patel352@example.com,12.10.2019,united kingdom,40,"1,834",No,Corporate
+C-0353,omar haddad,omar.haddad353@example.com,26.02.2022,United Kingdom,55,$422.28,N,Corporate
+C-0354,Kofi Müller,kofi.muller354@example.com,N/A,united states,27,$873.19,true,corporate
+C-0355,  Sofia Nguyen,sofia.nguyen355@example.com,2019-02-28,CANADA,40,3531.33,1,CONSUMER 
+C-0356,Ava Nguyen,ava.nguyen356@example.com,2024-10-12,Germany,31,456.35,true,Corporate
+C-0357,OMAR O'BRIEN,omar.obrien357@example.com,11.04.2024,usa,36,"$1,810.81",yes,consumer
+C-0358,  Kofi Tanaka,null,2025-12-17,UK,75,$876.39,0,corporate
+C-0359,Mia Müller,mia.muller359@example.com,01/26/2019,usa,59,"$1,941.01",Yes,small business
+C-0360,Zoe Ivanova,zoe.ivanova360@example.com,2022-01-22,germany,38,1529.58,Y,corporate
+C-0361,Jonas Okafor,JONAS.OKAFOR361@EXAMPLE.COM,2021-05-19,Canada ,N/A,$756.42,true,small business
+C-0362,Mia  Haddad,MIA.HADDAD362@EXAMPLE.COM,2021-11-06,India,38,1163.76,1,Corporate
+C-0363,Emma Patel,emma.patel363@example.com,2023-02-02,united kingdom,81,845.25,Y,Small Business
+C-0364,Kofi Kim,kofi.kim364@example.com,2023-06-13,Germany,22,3576.62,yes,CONSUMER 
+C-0365,jonas müller,jonas.muller365@example.com,09/22/2022,Deutschland,68,2117.87,0,corporate
+C-0366,Elena Garcia,elena.garcia366@example.com,2024-01-18,UK,23,"1,271",yes,CONSUMER 
+C-0367,Liam O'Brien,liam.obrien367@example.com,2025-03-11,united kingdom,28,"1,703",true,Small  Business
+C-0368,Ethan Okafor,-,26.05.2023,U.S.,-,"1,690",false,small business
+C-0369,Hana Rossi,hana.rossi369@example.com,2024-06-28,Deutschland,52,"$1,072.65",Y,Corporate
+C-0370,Elena  Garcia,ELENA.GARCIA370@EXAMPLE.COM,2021-05-11,united kingdom,47,3868.40,false,Corporate
+C-0371,Liam Cohen,liam.cohen371@example.com,09/14/2023,United States,19,"$1,012.08",Yes,Consumer
+C-0372,Ava O'Brien,ava.obrien372@example.com,2023-12-27,INDIA,40,,Yes,consumer
+C-0373,RAVI DUBOIS,ravi.dubois373@example.com,"Jan 1, 2023",United Kingdom,73,$396.36,1,Corporate
+C-0374,Kofi Nguyen,kofi.nguyen374@example.com,2024-07-27,CANADA,72,,Yes,CONSUMER 
+C-0375,mia smith,mia.smith375@example.com,2019-09-14,India,76,1423.89,No,small business
+C-0376,Nina Rossi,nina.rossi376@example.com,2025-08-22,INDIA,64,1144.38,1,corporate
+C-0377,Nina Tanaka ,nina.tanaka377@example.com,08/27/2025,united kingdom,69,962.79,no,small business
+C-0378,Mateo Dubois,mateo.dubois378@example.com,2023-03-06,united kingdom,43.0,,N,CONSUMER 
+C-0379,Jonas Dubois,jonas.dubois379@example.com,18.10.2022,U.S.,44,1428.18,1,consumer
+C-0380,nina cohen,nina.cohen380@example.com,"Jan 17, 2019",United Kingdom,34,NA,Y,Consumer
+C-0381,Nina Patel,nina.patel381@example.com,2019-05-07,India,81,-,true,corporate
+C-0382,Liam Nguyen,liam.nguyen382@example.com,01/21/2022,UK,55,1294.85,1,CONSUMER 
+C-0383,Emma  O'Brien,emma.obrien383@example.com,2021-01-15,Canada,40,1433.82,No,corporate
+C-0384,Zoe Smith,zoe.smith384@example.com,"Mar 13, 2023",India,43,$529.40,no,Small Business
+C-0385,Mia Garcia,mia.garcia385@example.com,2020-09-08,U.S.,25,1483.07,true,Small  Business
+C-0386,Lucas Johnson,lucas.johnson386@example.com,2019-07-15,united states,230,879,yes,Small Business
+C-0387,Sofia Dubois,sofia.dubois387@example.com,"Mar 10, 2019",Deutschland,82,562,1,CONSUMER 
+C-0388,  Sofia Müller,sofia.muller388@example.com,,Germany,21,2654.12,Yes,CONSUMER 
+C-0389,Aisha Ivanova,aisha.ivanova389@example.com,10/17/2020,CANADA,32,717.09,N,Corporate
+C-0390,Mia Garcia,N/A,2019-08-02,CANADA,43,1401.65,Y,Corporate
+C-0391,CHEN O'BRIEN,chen.obrien391@example.com,2021-08-14,united kingdom,47,2841.71,Y,Consumer
+C-0392,Lucas Nguyen,-,2020-01-23,Canada ,75,-,Y,CONSUMER 
+C-0393,Lucas Patel,lucas.patel393@example.com,2024-06-20,Germany,76,"3,397",No,corporate
+C-0394,Lucas O'Brien,lucas.obrien394@example.com,2025-11-06,INDIA,69,1389.20,Yes,Corporate
+C-0395,ravi patel,NA,2022-06-28,United Kingdom,70.0,"$3,362.80",No,Small  Business
+C-0396,sofia nguyen,sofia.nguyen396@example.com,2021-12-08,United Kingdom,21,"$1,343.67",1,Small Business
+C-0397,Lucas Smith,lucas.smith397@example.com,2021-08-18,United Kingdom,25,1987.26,1,Small  Business
+C-0398,Jonas  Dubois,jonas.dubois398@example.com,2023-07-19,U.S.,32,1080.65,true,Small Business
+C-0399,Sofia O'Brien,sofia.obrien399@example.com,NA,India,40,1013.15,No,small business
+C-0400,Priya Johnson,priya.johnson400@example.com,2024-07-08,india ,51,863.34,Yes,Corporate
+C-0401,emma rossi,emma.rossi401@example.com,2024-11-10,Germany,24,"$1,431.63",Yes,CONSUMER 
+C-0207,Chen Rossi,CHEN.ROSSI207@EXAMPLE.COM,06/19/2020,india ,58,881.70,false,corporate
+C-0402,Hana Kim,hana.kim402@example.com,2021-11-12,Deutschland,51,1290.59,N,Corporate
+C-0403,Jonas Okafor,jonas.okafor403@example.com,04/20/2021,Germany,31,-,true,small business
+C-0404,Ava Patel,ava.patel404@example.com,2022-01-14,UK,37,1124.97,no,Consumer
+C-0405,Emma Okafor,emma.okafor405@example.com,2023-06-05,germany,74,7701.13,N,Small Business
+C-0406,Chen Nguyen ,chen.nguyen406@example.com,2020-04-25,Canada ,43,"$1,107.72",no,Corporate
+C-0407,Jonas Haddad,jonas.haddad407@example.com,2025-06-20,india ,76,"$1,137.11",Y,corporate
+C-0408,Elena  Okafor,elena.okafor408@example.com,2020-06-10,united kingdom,27,$766.01,1,Small Business
+C-0409,Ravi Silva,,09/25/2019,usa,66,995.80,Yes,Consumer
+C-0410,Aisha Silva,aisha.silva410@example.com,16.11.2020,India,63,1860.45,no,corporate
+C-0411,Ravi Rossi,ravi.rossi411@example.com,2021-08-21,india ,66,740000,true,CONSUMER 
+C-0412,Jonas O'Brien,jonas.obrien412@example.com,2022-10-11,CANADA,62,1914.28,Yes,corporate
+C-0413,Sofia Silva,sofia.silva413@example.com,2023-06-07,INDIA,53,$954.76,false,Small  Business
+C-0414,Ava Smith,ava.smith414@example.com,2021-04-15,Deutschland,63,1053.89,Y,corporate
+C-0415,Nina Müller,nina.muller415@example.com,2022-05-28,Canada,24,"$1,776.63",true,Consumer
+C-0416,Elena Müller,elena.muller416@example.com,2019-11-03,usa,null,420.94,No,corporate
+C-0417,Emma Nguyen,emma.nguyen417@example.com,null,United Kingdom,22,$885.74,1,Small  Business
+C-0418,  Lucas Garcia,lucas.garcia418@example.com,03.11.2022,India,31,990.25,1,Small  Business
+C-0419,  Noah Okafor,noah.okafor419@example.com,04/04/2022,Canada ,66,"$1,466.07",N,corporate
+C-0420,JONAS GARCIA,JONAS.GARCIA420@EXAMPLE.COM,08/13/2019,U.K.,44,NA,0,small business
+C-0421,Ethan Silva,ETHAN.SILVA421@EXAMPLE.COM,05.05.2025,Canada ,49,1361.89,1,small business
+C-0422,Jonas Okafor,jonas.okafor422@example.com,23.05.2025,usa,75,835.61,0,CONSUMER 
+C-0423,Priya Müller,priya.muller423@example.com,"Mar 22, 2023",Canada ,36,641.11,no,corporate
+C-0424,Omar Dubois,omar.dubois424@example.com,2024-07-20,india ,69,1612.90,true,Small Business
+C-0425,Mateo  Garcia,mateo.garcia425@example.com,06/26/2019,united kingdom,unknown,3093.52,Yes,CONSUMER 
+C-0426,Nina Cohen,nina.cohen426@example.com,2024-01-24,UK,24,$836.60,Y,CONSUMER 
+C-0427,Mateo Garcia,null,2024-11-18,usa,73,958.39,Yes,corporate
+C-0428,Hana Dubois,hana.dubois428@example.com,2022-01-08,Canada ,37,1203.96,yes,corporate
+C-0429,  Zoe Johnson,zoe.johnson429@example.com,2019-07-19,germany,61,"$1,980.95",1,Consumer
+C-0430,OMAR KIM,omar.kim430@example.com,2023-07-23,germany,41,$876.73,1,CONSUMER 
+C-0431,Zoe Patel,zoe.patel431@example.com,08/01/2020,CANADA,33,973.51,1,consumer
+C-0432,Lucas Haddad,lucas.haddad432@example.com,07/07/2025,united kingdom,57,"$3,019.88",N,Small  Business
+C-0208,Mia Smith,mia.smith208@example.com,11.04.2024,United States,29.0,$943.59,yes,Small Business
+C-0433,Mia O'Brien,-,2021-03-06, United States,77,334.51,1,Corporate
+C-0434,aisha okafor,aisha.okafor434@example.com,2022-11-13,germany,70,"$5,022.01",1,Consumer
+C-0435,Liam Johnson ,liam.johnson435@example.com,2021-05-15,United States,80,4086.25,1,corporate
+C-0436,Liam Cohen,liam.cohen436@example.com,2023-07-27,CANADA,67,2117.71,Y,Corporate
+C-0437,Ethan Kim,ethan.kim437@example.com,2023-06-12,germany,67.0,1031.70,0,small business
+C-0438,Liam Müller,LIAM.MULLER438@EXAMPLE.COM,2022-04-18,Deutschland,61,"$4,297.73",yes,Consumer
+C-0439,Nina Ivanova,nina.ivanova439@example.com,23.10.2021,germany,63.0,1115.18,yes,CONSUMER 
+C-0440,Emma Okafor,emma.okafor440@example.com,2021-09-01,usa,41,"$1,528.50",N,CONSUMER 
+C-0441,Ravi Okafor,ravi.okafor441@example.com,2020-07-25,Deutschland,80,-,yes,Consumer
+C-0442,Omar O'Brien,omar.obrien442@example.com,06.02.2020,Canada,82,941.30,no,Consumer
+C-0443,Liam Patel,liam.patel443@example.com,"Mar 21, 2019",Germany,63,1104.21,yes,corporate
+C-0444,Nina Haddad,nina.haddad444@example.com,01/04/2021,UK,69,"1,403",true,small business
+C-0445,Priya Johnson,priya.johnson445@example.com,2025-09-26,Canada,31,1150.54,1,Small Business
+C-0446,emma rossi,emma.rossi446@example.com,04/01/2023,United Kingdom,40,1542.95,true,consumer
+C-0447,Chen Ivanova,CHEN.IVANOVA447@EXAMPLE.COM,02/13/2020, United States,29,-,false,Small  Business
+C-0448,  Kofi Garcia,kofi.garcia448@example.com,-,usa,60,951.89,1,small business
+C-0370,Elena  Garcia,ELENA.GARCIA370@EXAMPLE.COM,2021-05-11,united kingdom,47,3868.40,false,Corporate
+C-0449,Omar O'Brien,omar.obrien449@example.com,2019-02-19,CANADA,82,"$1,397.28",1,Corporate
+C-0450,Elena O'Brien,elena.obrien450@example.com,-,U.S.,unknown,852.50,yes,Corporate
+C-0451,Elena Kim,N/A,"Aug 12, 2019",germany,54,$556.90,no,Small  Business
+C-0452,Lucas Rossi,lucas.rossi452@example.com,2019-08-01,Germany,52,1184.06,yes,corporate
+C-0453,Noah Patel,,08/27/2025,Deutschland,82,645.61,yes,Small Business
+C-0454,Noah Garcia,noah.garcia454@example.com,07/05/2019,Deutschland,19,"$1,406.21",1,consumer
+C-0455,Ava Okafor,ava.okafor455@example.com,14.05.2019,united kingdom,81,"$1,140.91",yes,consumer
+C-0456,Jonas Nguyen,jonas.nguyen456@example.com,2020-04-21,united states,32,"1,004",true,CONSUMER 
+C-0457,Chen Smith,chen.smith457@example.com,"Apr 16, 2019",united kingdom,80,695.78,yes,Corporate
+C-0458,Noah Müller,noah.muller458@example.com,2023-04-02, United States,74,"$2,403.53",1,consumer
+C-0459,Hana Müller,hana.muller459@example.com,2021-02-14,usa,58,2688.88,Y,Corporate
+C-0460,Aisha Patel,aisha.patel460@example.com,2020-06-20,United Kingdom,73,"$1,061.79",1,Consumer
+C-0461,  Sofia Silva,sofia.silva461@example.com,2019-12-12,U.S.,-,$690.40,1,Corporate
+C-0462,Sofia Haddad,sofia.haddad462@example.com,2021-04-26,germany,null,1741.22,true,corporate
+C-0463,Chen Okafor,CHEN.OKAFOR463@EXAMPLE.COM,2021-06-28,U.S.,37,-,yes,corporate
+C-0464,Nina Dubois,nina.dubois464@example.com,03/16/2022,Canada ,27,$722.74,true,Consumer
+C-0465,Ava Haddad ,ava.haddad465@example.com,2021-08-18, United States,72,"2,739",1,Small Business
+C-0466,Hana Tanaka,hana.tanaka466@example.com,2024-03-22,CANADA,55,1217.16,true,small business
+C-0467,nina nguyen,nina.nguyen467@example.com,2021-09-09,Canada ,41,$955.05,Yes,small business
+C-0468,Mia Rossi,mia.rossi468@example.com,2025-10-01,CANADA,69,null,true,Small  Business
+C-0469,Zoe Müller,zoe.muller469@example.com,2022-12-14,united kingdom,28,1401.47,No,Corporate
+C-0470,Mateo Dubois,null,20.01.2019,germany,20,1801.23,1,consumer
+C-0471,aisha johnson,aisha.johnson471@example.com,04/26/2025,united kingdom,44,$378.63,1,Consumer
+C-0472,Noah Ivanova,noah.ivanova472@example.com,2019-07-25,Deutschland,24,"2,091",Yes,corporate
+C-0473,Omar Dubois,OMAR.DUBOIS473@EXAMPLE.COM,2021-04-24,UK,55,1335.27,Yes,corporate
+C-0474,Ravi Ivanova,RAVI.IVANOVA474@EXAMPLE.COM,"Oct 21, 2021",Deutschland,80,915.01,yes,corporate
+C-0475,Priya Smith,priya.smith475@example.com,2022-02-08, United States,69,$777.07,Y,Consumer
+C-0476,Noah Haddad,NOAH.HADDAD476@EXAMPLE.COM,"Dec 19, 2022",USA,64,1110.14,No,corporate
+C-0477,Noah Cohen ,noah.cohen477@example.com,2019-03-16,Canada,64,2401.78,0,Small  Business
+C-0478,Omar Dubois,omar.dubois478@example.com,2024-09-06,usa,48,"$2,016.59",0,CONSUMER 
+C-0098,Sofia Garcia,sofia.garcia98@example.com,06/10/2021,UK,22,"3,707",N,corporate
+C-0479,Ravi Cohen,ravi.cohen479@example.com,2024-01-21,Canada,41,2668.88,Y,Consumer
+C-0480,Kofi Cohen,kofi.cohen480@example.com,2023-09-17,United Kingdom,81,1056.62,Yes,consumer
