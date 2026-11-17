@@ -23,8 +23,12 @@ PAGES = {
 
 @pytest.fixture
 def app():
+    from streamlit import config
     from streamlit.testing.v1 import AppTest
-    return AppTest.from_file(APP, default_timeout=60).run()
+    at = AppTest.from_file(APP, default_timeout=60)
+    # The app's config shows browsers only the exception type; tests need the message to explain a failure.
+    config.set_option("client.showErrorDetails", "full")
+    return at.run()
 
 
 def page_title(at) -> str:
@@ -76,15 +80,13 @@ def test_sample_loads_and_updates_sidebar_on_same_run(app):
     assert "What is preserved" in page_text(app)
 
 
-# History is built in Phase 3 (tests/test_clean_pages.py). Clean is built
-# too, but keeps a "Not available yet" notice for the later cleaning steps.
-@pytest.mark.parametrize("path", [p for p in PAGES if p not in ("views/upload.py", "views/profile.py",
-                                                                 "views/history.py")])
-def test_pages_show_placeholder_once_loaded(app, path):
+# Every page is built: History in Phase 3, Clean by Phase 6, Compare in Phase 7 and Export in Phase 8.
+@pytest.mark.parametrize("path", list(PAGES))
+def test_no_page_shows_placeholder_once_loaded(app, path):
     load_sample(app)
     app.switch_page(path).run()
     assert not app.exception
-    assert "Not available yet" in page_text(app)
+    assert "Not available yet" not in page_text(app)
     assert "messy_customers.csv" in sidebar_text(app)      # Dataset persists across pages
 
 

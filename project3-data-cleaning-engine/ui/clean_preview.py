@@ -12,6 +12,8 @@ import streamlit as st
 
 from refine.notes import plural, quote
 from refine.operations import Preview, canonical_json, jsonable
+from refine.operations.outlier_ops import TREATMENT_LABELS
+from refine.outliers import METHOD_KEYS, METHOD_LABELS, describe_settings, fmt
 from ui.components import callout, section, stat_card_html, stat_row
 from ui.state import confirm_apply, discard_preview, preview_request
 
@@ -92,6 +94,17 @@ def impact_cards(preview: Preview) -> list[str]:
             cards.append(stat_card_html("Replacements", f"{c.get('replacements', 0):,}", "Matches replaced"))
         cards.append(stat_card_html("Become empty", f"{r.get('became_empty', 0):,}", "Counted as missing"))
         return [*cards, *_shape_cards(impact)]
+    if op == "treat_outliers":
+        n = c.get("outliers", 0)
+        how = describe_settings(r["method"], {k: r[k] for k in METHOD_KEYS[r["method"]]})
+        cards = [stat_card_html("Outliers", f"{n:,}", f"{_pct(n, r['evaluated'])} of {r['evaluated']:,} values checked"),
+                 stat_card_html("Boundaries", f"{fmt(r['lower_bound'])} to {fmt(r['upper_bound'])}", how)]
+        if r["treatment"] == "remove_rows":
+            cards.append(stat_card_html("Rows removed", f"{c.get('rows_removed', 0):,}", f"{_pct(n, rows)} of {rows:,} rows"))
+        else:
+            cards.append(stat_card_html("Cells changed", f"{c.get('cells_changed', 0):,}",
+                                        TREATMENT_LABELS[r["treatment"]]))
+        return [*cards, *_shape_cards(impact)]
     if op == "remove_duplicates":
         n = c.get("rows_removed", 0)
         return [stat_card_html("Duplicate groups", f"{c.get('groups', 0):,}", "Sets of matching rows"),
@@ -129,10 +142,32 @@ def _details(preview: Preview) -> None:
         st.markdown("**Mappings (frozen in the step)**")
         st.dataframe(pd.DataFrame([{"From": a, "To": b} for a, b in r["mapping"]]), hide_index=True,
                      width="stretch")
+    elif op == "treat_outliers":
+        st.markdown("**Detection (frozen in the step)** · replay uses these boundaries, it does not recalculate them")
+        st.dataframe(outlier_table(r), hide_index=True, width="stretch")
     elif op == "fill_missing" and r["method"] in ("constant", "mean", "median", "mode"):
         st.markdown("**Fill values (frozen in the step)**")
         st.dataframe(pd.DataFrame([{"Column": c, "Fill value": v, "Cells filled": r["cells"][c]}
                                    for c, v in r["fills"].items()]), hide_index=True, width="stretch")
+
+
+def outlier_table(r: dict) -> pd.DataFrame:
+    """The frozen detection values and treatment of a Treat outliers plan."""
+    settings = {k: r[k] for k in METHOD_KEYS[r["method"]]}
+    names = {"q1": "Q1", "q3": "Q3", "iqr": "IQR", "mean": "Mean", "std": "Standard deviation (ddof = 0)",
+             "lower_value": "Lower percentile value", "upper_value": "Upper percentile value"}
+    rows = [("Column", r["column"]), ("Method", METHOD_LABELS[r["method"]]),
+            *((k.replace("_", " ").capitalize(), f"{v:g}") for k, v in settings.items()),
+            *((names.get(k, k), fmt(v)) for k, v in r["statistics"].items()),
+            ("Lower boundary", fmt(r["lower_bound"])), ("Upper boundary", fmt(r["upper_bound"])),
+            ("Values checked", f"{r['evaluated']:,}"), ("Missing (not checked)", f"{r['missing']:,}"),
+            ("Below lower boundary", f"{r['below']:,}"), ("Above upper boundary", f"{r['above']:,}"),
+            ("Treatment", TREATMENT_LABELS[r["treatment"]])]
+    if r["treatment"] == "replace_value":
+        rows.append(("Replacement value", fmt(r["value"])))
+    if r["result_dtype"] != r["source_dtype"]:
+        rows.append(("Stored as", f"{r['source_dtype']} → {r['result_dtype']}"))
+    return pd.DataFrame(rows, columns=["Setting", "Value"])
 
 
 SAMPLE_CAPTIONS = {
@@ -143,6 +178,7 @@ SAMPLE_CAPTIONS = {
     "fill_missing": "first {n} rows with a cell to fill, before and after",
     "add_missing_indicator": "a few rows with and without a missing value, and the new column",
     "remove_duplicates": "the first duplicate groups; in each, one row is kept and the others removed",
+    "treat_outliers": "first {n} rows with an outlier (low and high), before and after",
     "convert_type": "rows that cannot be converted first, then converted rows, before and after (written as text)",
     **{op: "first {n} rows with a cell that changes, before and after" for op in TEXT_OPERATIONS},
 }
@@ -181,13 +217,15 @@ def same_settings(operation: str, current: dict) -> bool:
 
 def render_preview(preview: Preview, current: dict) -> None:
     """The preview panel: summary, counts, warnings, details, sample, and Apply / Discard."""
-    plan, impact = preview.plan, preview.impact
+    plan = preview.plan
     with section("Preview", key="clean-preview",
                  caption="What this step would change. Nothing has been changed yet."):
         st.markdown(f"**{plan.label}** · {plan.summary}")
         stat_row(impact_cards(preview))
         if plan.warnings:
-            title = "Possible data loss" if plan.operation in LOSS_OPERATIONS else "Check before applying"
+            loss = plan.operation in LOSS_OPERATIONS or (plan.operation == "treat_outliers"
+                                                          and plan.resolved["treatment"] == "remove_rows")
+            title = "Possible data loss" if loss else "Check before applying"
             for warning in plan.warnings:
                 callout(title, warning, "caution")
         elif plan.operation == "drop_columns":

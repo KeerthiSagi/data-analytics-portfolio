@@ -34,7 +34,7 @@ def confirm(at):
 def test_tabs_render_with_placeholders(clean):
     text = page_text(clean)
     assert "What counts as missing" in text and "Groups and rows" in text
-    assert text.count("Not available yet") >= 1          # Phase 5 built Data types and Text; Outliers remains
+    assert text.count("Not available yet") == 0          # Phase 5 built Data types and Text; Phase 6 Outliers
     assert widget(clean, "selectbox", "Missing-value operation").value == "standardize_missing"
     assert clean.button(key="refine_preview_standardize_missing").disabled
 

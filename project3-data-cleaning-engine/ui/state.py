@@ -16,6 +16,24 @@ and the profiler version; the quality report also by the validity
 rules. Applying, undoing or resetting a step, or loading another file,
 changes the fingerprint and so refreshes them; reruns with unchanged
 data reuse them. Only the latest result is kept.
+
+The Compare page's comparison is cached the same way, keyed by the
+original and current fingerprints, the profiler and comparison versions
+and the validity rules. The original table's profile and quality report
+are kept separately (they only change with the rules or a new file), so
+after a step only the current side is profiled again.
+
+While the data is still the original (no step applied, or every step
+undone), the profile and quality report computed for the Profile page are
+also kept as the original's, so a later comparison only profiles the
+current side.
+
+The Export page reads the same caches without filling them
+(`cached_comparison`, `cached_reports`) and keeps only a small summary
+of what each format writes differently, keyed by the fingerprint. The
+comparison its reports need is held in a slot keyed like the Compare
+page's cache; a report download fills it, later draws and the Compare
+page reuse it. File bytes are never kept in the session.
 """
 
 from __future__ import annotations
@@ -28,8 +46,10 @@ from pathlib import Path
 
 import streamlit as st
 
+from refine.compare import COMPARE_VERSION, DatasetComparison
 from refine.duplicates import DuplicateReport, find_duplicates
 from refine.errors import CleaningError, LoadError
+from refine.export import ExportCheck, inspect_export
 from refine.loader import load_file
 from refine.missing import ColumnMissing, missing_summary
 from refine.operations import Preview
@@ -37,6 +57,7 @@ from refine.profile import PROFILE_VERSION, DatasetProfile, profile_dataset
 from refine.quality import QualityReport, ValidityRule, assess_quality
 from refine.session import CleaningSession
 from refine.source import LoadedDataset, LoadOptions
+from ui.exports import ComparisonSlot
 
 DATASET_KEY = "refine_dataset"
 ERROR_KEY = "refine_load_error"
@@ -53,8 +74,14 @@ FLASH_KEY = "refine_flash"
 DUPLICATES_KEY = "refine_duplicate_report"
 MISSING_SUMMARY_KEY = "refine_missing_summary"
 CONVERSION_ANALYSIS_KEY = "refine_conversion_analysis"      # ui/clean_types.py
+OUTLIER_ANALYSIS_KEY = "refine_outlier_analysis"            # ui/clean_outliers.py
+COMPARISON_KEY = "refine_comparison"                        # views/compare.py
+ORIGINAL_REPORTS_KEY = "refine_original_reports"            # Profile and quality of the original table
+EXPORT_CHECK_KEY = "refine_export_check"                    # views/export.py
+EXPORT_SLOT_KEY = "refine_export_comparison_slot"           # views/export.py: the reports' comparison
 CLEANING_KEYS = (CLEANING_KEY, PREVIEW_KEY, PREVIEW_REQUEST_KEY, APPLIED_TOKENS_KEY, FLASH_KEY, DUPLICATES_KEY,
-                 MISSING_SUMMARY_KEY, CONVERSION_ANALYSIS_KEY)
+                 MISSING_SUMMARY_KEY, CONVERSION_ANALYSIS_KEY, OUTLIER_ANALYSIS_KEY, COMPARISON_KEY,
+                 ORIGINAL_REPORTS_KEY, EXPORT_CHECK_KEY, EXPORT_SLOT_KEY)
 
 SAMPLE_PATH = Path(__file__).resolve().parent.parent / "sample_data" / "messy_customers.csv"
 SAMPLE_NAME = SAMPLE_PATH.name
@@ -109,7 +136,8 @@ def reparse(options: LoadOptions) -> bool:
     dataset = get_dataset()
     if dataset is None or dataset.raw_bytes is None:
         return False
-    return load_bytes(dataset.source.file_name, dataset.raw_bytes, options)
+    with st.spinner(f"Reading {dataset.source.file_name} again…"):
+        return load_bytes(dataset.source.file_name, dataset.raw_bytes, options)
 
 
 def uploader_key() -> str:
@@ -135,7 +163,9 @@ def on_upload_change() -> None:
     if uploaded is None or st.session_state.get(UPLOAD_ID_KEY) == uploaded.file_id:
         return
     st.session_state[UPLOAD_ID_KEY] = uploaded.file_id
-    load_bytes(uploaded.name, uploaded.getvalue())
+    # Large workbooks take several seconds to read; say what is happening.
+    with st.spinner(f"Reading {uploaded.name}…"):
+        load_bytes(uploaded.name, uploaded.getvalue())
 
 
 # ------------------------------------------------------------------
@@ -190,9 +220,108 @@ def get_quality(ds: LoadedDataset) -> QualityReport:
     cached = st.session_state.get(QUALITY_KEY)
     if cached is not None and cached[0] == key:
         return cached[1]
-    report = assess_quality(get_session(ds).data, get_profile(ds), rules)
+    session = get_session(ds)
+    profile = get_profile(ds)
+    report = assess_quality(session.data, profile, rules)
     st.session_state[QUALITY_KEY] = (key, report)
+    if not session.is_modified:          # Same fingerprint as the original: these are its reports too
+        st.session_state[ORIGINAL_REPORTS_KEY] = ((session.original_fingerprint, PROFILE_VERSION, rules),
+                                                  profile, report)
     return report
+
+
+def get_comparison(ds: LoadedDataset) -> DatasetComparison:
+    """Original vs current data. Read-only; recomputed only when either side or the rules change."""
+    session = get_session(ds)
+    rules = get_rules(ds)
+    key = _comparison_key(session, rules)
+    cached = st.session_state.get(COMPARISON_KEY)
+    if cached is not None and cached[0] == key:
+        return cached[1]
+    original_key = (session.original_fingerprint, PROFILE_VERSION, rules)
+    slot = st.session_state.get(EXPORT_SLOT_KEY)
+    if slot is not None and slot[0] == (session.session_id, *key) and slot[1].value is not None:
+        comparison = slot[1].value                                # Already built for an Export download
+        st.session_state[ORIGINAL_REPORTS_KEY] = (original_key, comparison.original_profile,
+                                                  comparison.original_quality)
+        st.session_state[COMPARISON_KEY] = (key, comparison)
+        return comparison
+    stored = st.session_state.get(ORIGINAL_REPORTS_KEY)
+    profile, quality = get_profile(ds), get_quality(ds)          # Shared with the Profile page
+    if stored is not None and stored[0] == original_key:
+        original_profile, original_quality = stored[1], stored[2]
+    elif not session.is_modified:
+        original_profile, original_quality = profile, quality     # Same fingerprint: same table
+    else:
+        original_profile = original_quality = None                # Computed by the comparison
+    comparison = session.compare(original_profile=original_profile, current_profile=profile,
+                                 original_quality=original_quality, current_quality=quality, rules=rules)
+    st.session_state[ORIGINAL_REPORTS_KEY] = (original_key, comparison.original_profile, comparison.original_quality)
+    st.session_state[COMPARISON_KEY] = (key, comparison)
+    return comparison
+
+
+def _comparison_key(session: CleaningSession, rules: tuple[ValidityRule, ...]) -> tuple:
+    return (session.original_fingerprint, session.fingerprint, PROFILE_VERSION, COMPARE_VERSION, rules)
+
+
+def cached_comparison(ds: LoadedDataset) -> DatasetComparison | None:
+    """The Compare page's comparison, if it was made for the current data and rules; never computes one."""
+    session = get_session(ds)
+    cached = st.session_state.get(COMPARISON_KEY)
+    if cached is not None and cached[0] == _comparison_key(session, get_rules(ds)):
+        return cached[1]
+    return None
+
+
+def cached_reports(ds: LoadedDataset) -> dict:
+    """Profiles and quality reports already computed for the current state, as compare_datasets arguments.
+
+    Only entries that match the current data and rules are returned, so
+    a comparison built from them describes this exact state. Never computes.
+    """
+    session = get_session(ds)
+    rules = get_rules(ds)
+    reports = {}
+    stored = st.session_state.get(ORIGINAL_REPORTS_KEY)
+    if stored is not None and stored[0] == (session.original_fingerprint, PROFILE_VERSION, rules):
+        reports["original_profile"], reports["original_quality"] = stored[1], stored[2]
+    profile = cached_profile(ds)
+    if profile is not None:
+        reports["current_profile"] = profile
+        quality = st.session_state.get(QUALITY_KEY)
+        if quality is not None and quality[0] == (fingerprint(ds), rules):
+            reports["current_quality"] = quality[1]
+    return reports
+
+
+def export_comparison_slot(ds: LoadedDataset) -> ComparisonSlot:
+    """The comparison the Export page's reports use, kept while the data and rules are unchanged.
+
+    Starts from the Compare page's comparison or the cached profiles; is
+    filled at most once, by the first report download. Never computes here.
+    """
+    session = get_session(ds)
+    rules = get_rules(ds)
+    key = (session.session_id, *_comparison_key(session, rules))
+    stored = st.session_state.get(EXPORT_SLOT_KEY)
+    cached = cached_comparison(ds)
+    if stored is not None and stored[0] == key and (stored[1].value is not None or cached is None):
+        return stored[1]
+    slot = ComparisonSlot(session, rules, cached, cached_reports(ds))
+    st.session_state[EXPORT_SLOT_KEY] = (key, slot)
+    return slot
+
+
+def get_export_check(ds: LoadedDataset) -> ExportCheck:
+    """What the CSV and Excel downloads write differently from the stored values (cached by data state)."""
+    session = get_session(ds)
+    cached = st.session_state.get(EXPORT_CHECK_KEY)
+    if cached is not None and cached[0] == session.fingerprint:
+        return cached[1]
+    check = inspect_export(session.data)
+    st.session_state[EXPORT_CHECK_KEY] = (session.fingerprint, check)
+    return check
 
 
 # ------------------------------------------------------------------
@@ -236,6 +365,15 @@ def get_preview() -> Preview | None:
         st.session_state.pop(PREVIEW_REQUEST_KEY, None)
         flash("warning", "The data changed after the preview was made, so that preview was discarded. "
                          "Nothing was applied. Preview the step again.")
+        return None
+    return preview
+
+
+def pending_preview() -> Preview | None:
+    """The pending preview if it is still current, without discarding or flashing anything. Read-only."""
+    preview = st.session_state.get(PREVIEW_KEY)
+    session = current_session()
+    if preview is None or session is None or not session.is_current(preview):
         return None
     return preview
 

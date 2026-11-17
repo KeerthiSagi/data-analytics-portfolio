@@ -85,7 +85,22 @@ def test_streamlit_theme_matches_design_tokens():
 
 
 def test_requirements_pin_supported_ranges():
-    text = (PROJECT_DIR / "requirements.txt").read_text("utf-8")
-    for package in ["streamlit", "pandas", "openpyxl", "pyarrow"]:
-        assert package in text
-    assert "pandas>=2.2.0,<4" in text
+    """Every dependency has an upper bound, and every tested version is inside its range."""
+    from packaging.requirements import Requirement
+
+    lines = (PROJECT_DIR / "requirements.txt").read_text("utf-8").splitlines()
+    reqs = {}
+    for line in lines:
+        line = line.split("#", 1)[0].strip()
+        if line:
+            req = Requirement(line)
+            reqs[req.name] = req.specifier
+    assert set(reqs) == {"streamlit", "pandas", "pyarrow", "openpyxl", "plotly", "numpy"}
+    for name, spec in reqs.items():
+        assert any(s.operator == "<" for s in spec), f"{name} has no upper bound"
+    tested = {"pandas": ["2.2.3", "3.0.6", "3.1.1"], "streamlit": ["1.65.0", "1.67.0"],
+              "pyarrow": ["25.0.1", "26.0.1"], "numpy": ["2.5.4", "2.5.5"], "openpyxl": ["3.1.5"],
+              "plotly": ["7.1.0"]}
+    for name, versions in tested.items():
+        for version in versions:
+            assert version in reqs[name], f"{name} {version} is tested but outside {reqs[name]}"

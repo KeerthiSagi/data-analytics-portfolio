@@ -41,7 +41,7 @@ def frames_with(at, column):
 def test_tabs_render(clean):
     text = page_text(clean)
     assert "Data types" in text and "Never guess" not in text
-    assert text.count("Not available yet") == 1                              # Only Outliers is planned
+    assert text.count("Not available yet") == 0                              # Outliers is built (Phase 6)
     assert clean.button(key="refine_preview_convert_type").disabled          # Nothing chosen yet
     assert clean.button(key="refine_preview_trim_whitespace").disabled
 

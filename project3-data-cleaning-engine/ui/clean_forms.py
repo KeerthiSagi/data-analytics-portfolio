@@ -8,6 +8,11 @@ same operation is shown with the shared Apply flow (ui/clean_preview.py).
 Widget keys include the session's state version, so after apply, undo or
 reset every form starts fresh and never offers a column that no longer
 exists.
+
+Value widgets use persist_state="session", so their settings survive a
+visit to another page. Without it Streamlit clears them on a page switch,
+and a pending preview could no longer be applied: the form would differ
+from the preview's settings, as if the user had changed them.
 """
 
 from __future__ import annotations
@@ -27,7 +32,7 @@ from refine.missing import (
     scan_markers,
     suggest_markers,
 )
-from refine.notes import plural, quote
+from refine.notes import plural
 from refine.operations import Preview, get_operation
 from refine.operations.missing_ops import INDICATOR_FALSE, INDICATOR_TRUE, indicator_name
 from ui.clean_preview import render_preview
@@ -85,13 +90,14 @@ def _small_table(frame: pd.DataFrame, rows: int = 8) -> None:
 def columns_tab(session, preview: Preview | None) -> None:
     op = get_operation("drop_columns")
     with section("Choose a step", key="clean-choose"):
-        st.selectbox("Operation", [op.op_id], key="refine_clean_operation", format_func=lambda _: op.label)
+        st.selectbox("Operation", [op.op_id], key="refine_clean_operation", format_func=lambda _: op.label,
+                     persist_state="session")
         st.caption(op.description)
         key = f"refine_drop_columns_{session.session_id[:8]}_{session.version}"
         selection = st.multiselect(
             "Columns to drop", list(session.columns), key=key,
             placeholder="Choose one or more columns",
-            help="Only the columns you choose are removed. At least one column must remain.",
+            help="Only the columns you choose are removed. At least one column must remain.", persist_state="session",
         )
 
         def settings() -> dict:
@@ -111,7 +117,8 @@ def _standardize_form(session, data: pd.DataFrame, preview) -> None:
     k_cols, k_empty, k_ws = wkey(session, "sm_columns"), wkey(session, "sm_empty"), wkey(session, "sm_ws")
     k_tokens, k_custom, k_case = wkey(session, "sm_tokens"), wkey(session, "sm_custom"), wkey(session, "sm_case")
     text_cols = [c for c in session.columns if isinstance(data[c].dtype, pd.StringDtype)]
-    columns = st.multiselect("Columns to check", text_cols, key=k_cols, placeholder="Choose one or more columns")
+    columns = st.multiselect("Columns to check", text_cols, key=k_cols, placeholder="Choose one or more columns",
+                             persist_state="session")
 
     found = suggest_markers(data, columns) if columns else ()
     if columns:
@@ -128,9 +135,10 @@ def _standardize_form(session, data: pd.DataFrame, preview) -> None:
     a, b = st.columns(2)
     with a:
         st.checkbox("Empty text (\"\")", key=k_empty,
-                    help="Already counted as missing; this stores it as no value.")
+                    help="Already counted as missing; this stores it as no value.", persist_state="session")
     with b:
-        st.checkbox("Whitespace-only text", key=k_ws, help="Cells holding only spaces, tabs or line breaks.")
+        st.checkbox("Whitespace-only text", key=k_ws, help="Cells holding only spaces, tabs or line breaks.",
+                    persist_state="session")
     options = list(PRESET_TOKENS)
     for m in found:
         t = m.value.strip()
@@ -138,12 +146,13 @@ def _standardize_form(session, data: pd.DataFrame, preview) -> None:
             options.append(t)
     st.multiselect("Markers to treat as missing", options, key=k_tokens, placeholder="Choose markers",
                    help="Compared after removing surrounding spaces. Includes common markers and the null-like "
-                        "text found above.")
+                        "text found above.", persist_state="session")
     st.text_area("Other markers, one per line", key=k_custom, height=80,
                  placeholder="For example: unknown\n#N/A",
-                 help="Any other text that means 'no value' in these columns.")
+                 help="Any other text that means 'no value' in these columns.", persist_state="session")
     st.checkbox("Match case exactly", key=k_case, value=True,
-                help="When on, 'NA' does not match 'na'. When off, any capitalization matches.")
+                help="When on, 'NA' does not match 'na'. When off, any capitalization matches.",
+                persist_state="session")
 
     def settings() -> dict:
         custom = [line.strip() for line in str(_get(k_custom, "")).splitlines() if line.strip()]
@@ -179,12 +188,14 @@ HOW_LABELS = {"any": "Any selected column is missing", "all": "All selected colu
 def _drop_rows_form(session, preview) -> None:
     k_cols, k_how, k_min = wkey(session, "dr_columns"), wkey(session, "dr_how"), wkey(session, "dr_min")
     columns = st.multiselect("Columns to check for missing values", list(session.columns), key=k_cols,
-                             placeholder="Choose one or more columns")
-    how = st.radio("Remove a row when", list(HOW_LABELS), key=k_how, format_func=HOW_LABELS.get)
+                             placeholder="Choose one or more columns", persist_state="session")
+    how = st.radio("Remove a row when", list(HOW_LABELS), key=k_how, format_func=HOW_LABELS.get,
+                   persist_state="session")
     if how == "min_present":
         st.number_input("Minimum number of selected columns that must have a value", min_value=1,
                         value=1, step=1, key=k_min, disabled=not columns,
-                        help="A row is removed when fewer of the selected columns than this have a value.")
+                        help="A row is removed when fewer of the selected columns than this have a value.",
+                        persist_state="session")
 
     def settings() -> dict:
         h = _get(k_how, "any")
@@ -201,7 +212,8 @@ def _drop_rows_form(session, preview) -> None:
 
 def _drop_columns_form(ds, session, preview) -> None:
     k_t = wkey(session, "dc_threshold")
-    threshold = st.slider("Drop columns with at least this share of missing values (%)", 1, 100, 50, 1, key=k_t)
+    threshold = st.slider("Drop columns with at least this share of missing values (%)", 1, 100, 50, 1, key=k_t,
+                          persist_state="session")
     summary = get_missing_summary(ds)
     table = pd.DataFrame([{"Column": c.name, "Missing cells": c.missing, "Missing %": round(c.pct, 1),
                            "Would be dropped": "Yes" if c.rows and c.pct >= threshold else "No"}
@@ -230,18 +242,22 @@ def _fill_form(ds, session, data: pd.DataFrame, preview) -> None:
     k_cols, k_method = wkey(session, "fm_columns"), wkey(session, "fm_method")
     k_value, k_dec, k_excl = wkey(session, "fm_value"), wkey(session, "fm_decimals"), wkey(session, "fm_exclude")
     columns = st.multiselect("Columns to fill", list(session.columns), key=k_cols,
-                             placeholder="Choose one or more columns")
-    method = st.selectbox("Fill with", list(FILL_LABELS), key=k_method, format_func=FILL_LABELS.get)
+                             placeholder="Choose one or more columns", persist_state="session")
+    method = st.selectbox("Fill with", list(FILL_LABELS), key=k_method, format_func=FILL_LABELS.get,
+                          persist_state="session")
     if method == "constant":
         st.text_input("Fill value", key=k_value, placeholder="For example: Unknown or 0",
-                      help="Written exactly as typed into every missing cell of the selected columns.")
+                      help="Written exactly as typed into every missing cell of the selected columns.",
+                      persist_state="session")
     elif method in ("mean", "median"):
         callout("Numbers are read from text", NUMERIC_NOTE, "neutral")
         st.selectbox("Round to", ROUNDING, index=3, key=k_dec,
-                     format_func=lambda d: "Full precision" if d is None else plural(d, "decimal place"))
+                     format_func=lambda d: "Full precision" if d is None else plural(d, "decimal place"),
+                     persist_state="session")
         st.checkbox("Calculate from plain numbers only, leaving other values as they are", key=k_excl,
                     help="Without this, the step is refused when a column holds values that are not plain "
-                         "numbers, so nothing is calculated from part of a column by accident.")
+                         "numbers, so nothing is calculated from part of a column by accident.",
+                         persist_state="session")
     elif method in ("ffill", "bfill"):
         callout("Depends on row order",
                 "Each missing cell receives the value from the nearest row "
@@ -284,10 +300,12 @@ def _fill_form(ds, session, data: pd.DataFrame, preview) -> None:
 
 def _indicator_form(session, preview) -> None:
     k_col, k_name = wkey(session, "mi_column"), wkey(session, "mi_name")
-    column = st.selectbox("Column", list(session.columns), key=k_col, index=None, placeholder="Choose a column")
+    column = st.selectbox("Column", list(session.columns), key=k_col, index=None, placeholder="Choose a column",
+                          persist_state="session")
     default = indicator_name(column, session.columns) if column else "<column>_missing"
     st.text_input("New column name (optional)", key=k_name, placeholder=default,
-                  help=f"Leave empty to use {default}. A number is added if that name is taken.")
+                  help=f"Leave empty to use {default}. A number is added if that name is taken.",
+                  persist_state="session")
     st.caption(f"The new column is placed right after the chosen one and holds '{INDICATOR_TRUE}' where the "
                f"value is missing and '{INDICATOR_FALSE}' elsewhere. Add it before filling, so it records "
                "which values were originally missing.")
@@ -305,7 +323,7 @@ def missing_tab(ds, session, preview: Preview | None) -> None:
     labels = {op: get_operation(op).label for op in MISSING_OPERATIONS}
     with section("Missing values", key="clean-missing"):
         op_id = st.selectbox("Missing-value operation", list(labels), key="refine_missing_operation",
-                             format_func=labels.get, on_change=discard_preview)
+                             format_func=labels.get, on_change=discard_preview, persist_state="session")
         st.caption(get_operation(op_id).description)
         callout("What counts as missing", MISSING_DEFINITION, "neutral")
         data = session.data
@@ -365,17 +383,20 @@ def duplicates_tab(session, preview: Preview | None) -> None:
     with section("Duplicates", key="clean-duplicates"):
         st.caption(op.description)
         callout("Groups and rows", DUPLICATE_TERMS, "neutral")
-        match = st.radio("Match rows on", list(MATCH_LABELS), key=k_match, format_func=MATCH_LABELS.get)
+        match = st.radio("Match rows on", list(MATCH_LABELS), key=k_match, format_func=MATCH_LABELS.get,
+                         persist_state="session")
         if match == "key":
             st.multiselect("Key columns", list(session.columns), key=k_cols,
                            placeholder="For example: customer_id",
-                           help="Rows with equal values in all of these columns match, even if other columns differ.")
+                           help="Rows with equal values in all of these columns match, even if other columns differ.",
+                           persist_state="session")
         a, b = st.columns(2)
         with a:
-            st.checkbox("Ignore case", key=k_case, help="'ANN@X.COM' matches 'ann@x.com'.")
+            st.checkbox("Ignore case", key=k_case, help="'ANN@X.COM' matches 'ann@x.com'.", persist_state="session")
         with b:
             st.checkbox("Ignore extra spaces", key=k_ws,
-                        help="Spaces at the start or end are ignored and runs of spaces count as one.")
+                        help="Spaces at the start or end are ignored and runs of spaces count as one.",
+                        persist_state="session")
         st.caption("These options change how rows are compared only. Stored values are never changed by matching.")
 
         def match_settings() -> dict:
@@ -395,7 +416,7 @@ def duplicates_tab(session, preview: Preview | None) -> None:
 
         st.markdown("**Remove duplicates**")
         st.radio("In each group, keep", ["first", "last"], key=k_keep, horizontal=True,
-                 format_func=lambda k: f"The {k} row (in current row order)")
+                 format_func=lambda k: f"The {k} row (in current row order)", persist_state="session")
 
         def settings() -> dict:
             return {**match_settings(), "keep": _get(k_keep, "first")}

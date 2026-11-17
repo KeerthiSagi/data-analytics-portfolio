@@ -39,7 +39,8 @@ def _shown(value: str) -> str:
 def _columns(session, data, key: str) -> list[str]:
     text_cols = [c for c in session.columns if column_kind(data[c].dtype) == "text"]
     typed = [c for c in session.columns if c not in text_cols]
-    chosen = st.multiselect("Text columns", text_cols, key=key, placeholder="Choose one or more columns")
+    chosen = st.multiselect("Text columns", text_cols, key=key, placeholder="Choose one or more columns",
+                            persist_state="session")
     if typed:
         st.caption(f"Typed columns are not listed ({', '.join(map(quote, typed[:6]))}"
                    f"{' and more' if len(typed) > 6 else ''}): text rules would have to turn their values into "
@@ -72,39 +73,43 @@ def _simple_form(op_id: str, session, data, preview) -> None:
     extra_keys: dict[str, str] = {}
     if op_id == "change_case":
         k = wkey(session, "tx_case")
-        case = st.radio("Capitalization", list(CASES), key=k, format_func=CASE_LABELS.get, horizontal=True)
+        case = st.radio("Capitalization", list(CASES), key=k, format_func=CASE_LABELS.get, horizontal=True,
+                        persist_state="session")
         st.caption(CASE_HELP[case])
         extra_keys["case"] = k
     elif op_id == "collapse_whitespace":
         k = wkey(session, "tx_all_ws")
         st.checkbox("Also treat tabs, line breaks and no-break spaces as spaces", key=k,
                     help="Off: only runs of ordinary spaces are collapsed ('New    York' → 'New York'). On: any "
-                         "run of whitespace becomes one space.")
+                         "run of whitespace becomes one space.", persist_state="session")
         extra_keys["all_whitespace"] = k
     elif op_id == "normalize_unicode":
         k = wkey(session, "tx_form")
         st.radio("Normalization form", ["NFKC", "NFC"], key=k, horizontal=True,
                  format_func={"NFKC": "NFKC (compatibility: full-width ＡＢＣ → ABC)",
-                              "NFC": "NFC (canonical: joins accents only)"}.get)
+                              "NFC": "NFC (canonical: joins accents only)"}.get, persist_state="session")
         extra_keys["form"] = k
     elif op_id == "remove_control_characters":
         k1, k2 = wkey(session, "tx_keep_ws"), wkey(session, "tx_invisible")
-        st.checkbox("Keep tabs and line breaks", key=k1, value=True)
+        st.checkbox("Keep tabs and line breaks", key=k1, value=True, persist_state="session")
         st.checkbox("Also remove invisible formatting characters", key=k2,
                     help="Removes only: " + ", ".join(INVISIBLE_FORMAT.values()) + ". Zero-width joiners, "
-                         "which several languages and emoji need, are kept.")
+                         "which several languages and emoji need, are kept.", persist_state="session")
         extra_keys["keep_whitespace"], extra_keys["remove_invisible"] = k1, k2
     elif op_id == "find_replace":
         k_find, k_rep = wkey(session, "tx_find"), wkey(session, "tx_replace")
         k_match, k_case = wkey(session, "tx_match"), wkey(session, "tx_case_sensitive")
         a, b = st.columns(2)
         with a:
-            st.text_input("Find", key=k_find, placeholder="Text to find", help="Matched literally, spaces included.")
+            st.text_input("Find", key=k_find, placeholder="Text to find", help="Matched literally, spaces included.",
+                          persist_state="session")
         with b:
-            st.text_input("Replace with", key=k_rep, placeholder="Leave empty to delete the text")
+            st.text_input("Replace with", key=k_rep, placeholder="Leave empty to delete the text",
+                          persist_state="session")
         st.radio("Match", ["whole_cell", "substring"], key=k_match, horizontal=True,
-                 format_func={"whole_cell": "Whole cell equals the text", "substring": "Every occurrence inside cells"}.get)
-        st.checkbox("Match case exactly", key=k_case, value=True)
+                 format_func={"whole_cell": "Whole cell equals the text", "substring": "Every occurrence inside cells"}.get,
+                 persist_state="session")
+        st.checkbox("Match case exactly", key=k_case, value=True, persist_state="session")
         extra_keys.update(find=k_find, replace=k_rep, match=k_match, case_sensitive=k_case)
 
     defaults = {"case": "lower", "all_whitespace": False, "form": "NFKC", "keep_whitespace": True,
@@ -184,7 +189,8 @@ def _clear_pairs(key: str) -> None:
 def _categories_form(session, data, preview) -> None:
     text_cols = [c for c in session.columns if column_kind(data[c].dtype) == "text"]
     k_col = wkey(session, "mc_column")
-    column = st.selectbox("Column", text_cols, key=k_col, index=None, placeholder="Choose a text column")
+    column = st.selectbox("Column", text_cols, key=k_col, index=None, placeholder="Choose a text column",
+                          persist_state="session")
 
     def settings() -> dict:
         col = st.session_state.get(k_col)
@@ -215,9 +221,9 @@ def _categories_form(session, data, preview) -> None:
     k_values, k_target = wkey(session, "mc_values"), wkey(session, "mc_target")
     options = [v for v, _ in freqs[:MAX_LISTED_VALUES]]
     st.multiselect("Values to map", options, key=k_values, format_func=_shown,
-                   placeholder="Choose observed values")
+                   placeholder="Choose observed values", persist_state="session")
     st.text_input("Canonical value", key=k_target, placeholder="For example: New York",
-                  help="The chosen values are replaced by exactly this text.")
+                  help="The chosen values are replaced by exactly this text.", persist_state="session")
     ready_add = bool(st.session_state.get(k_values)) and bool(str(_get(k_target, "")).strip())
     st.button("Add mapping", key=wkey(session, "mc_add"), icon=":material/add:", disabled=not ready_add,
               on_click=_add_selected, args=(key, k_values, k_target))
@@ -236,7 +242,7 @@ def text_tab(session, preview: Preview | None) -> None:
     labels = {op: get_operation(op).label for op in TEXT_OPERATION_IDS}
     with section("Text", key="clean-text"):
         op_id = st.selectbox("Text operation", list(labels), key="refine_text_operation", format_func=labels.get,
-                             on_change=discard_preview)
+                             on_change=discard_preview, persist_state="session")
         st.caption(get_operation(op_id).description)
         callout("Missing values are kept", "Cells with no value stay missing. A rule that leaves a cell empty "
                 "(for example trimming a cell that holds only spaces) makes it empty text, which REFINE counts as "

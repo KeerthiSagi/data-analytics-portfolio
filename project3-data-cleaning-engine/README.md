@@ -1,55 +1,44 @@
-# REFINE — Automated Data Cleaning Engine
+# REFINE — Data Cleaning Engine
 
-A Streamlit app for inspecting and cleaning CSV and Excel files.
+REFINE is a web app for inspecting, cleaning and preparing messy datasets for analysis. You upload a CSV or Excel file, see what is wrong with it, fix the problems step by step, compare the result with the original, and download the cleaned data along with a record of every change.
 
-**Live app:** https://data-analyst-portfolio-fbu8nnzddmgchaadmjmc8q.streamlit.app/ (may lag behind the latest code in this repository)
+**Live app:** https://data-analyst-portfolio-fbu8nnzddmgchaadmjmc8q.streamlit.app/
+The live version is older than this code. It has uploading, profiling and the first cleaning tools, but not outlier handling, the comparison page or the downloads described below. Run it locally to see the current version.
 
-## Overview
+## Why I built it
 
-REFINE loads a CSV or Excel file, profiles every column, and reports data quality problems such as missing values, duplicates, inconsistent formatting and numbers or dates stored as text. Cleaning steps are rule-based. Each step shows a preview of its effect, is applied only after you confirm it, and is recorded so it can be undone or replayed on the original file.
+Real datasets are rarely ready to analyze. They have missing values, duplicate records, numbers and dates stored as text, inconsistent spellings and the occasional extreme value. Fixing these by hand in a spreadsheet is slow, easy to get wrong, and hard to repeat on the next file.
 
-**Status:** in development. Phases 1–5 are complete (engine version 0.5.0). Outlier handling, before-and-after comparison and exporting the cleaned data are planned and not available yet.
+I wanted a tool that makes data cleaning visible and reversible: every change is previewed before it happens, recorded once it does, and can be undone or repeated.
 
-## Features
+## What you can do
 
-**Loading**
-- Upload `.csv` or `.xlsx` files, or open the built-in sample dataset
-- Detects CSV encoding and delimiter, with options to override them, pick an Excel sheet or skip title rows
-- Load notes list every adjustment made while reading the file, such as padded short rows or renamed duplicate columns
+- **Upload and inspect** CSV or Excel files, or try the included sample dataset.
+- **Find quality problems:** missing values, duplicates, extra spaces, inconsistent capitalization, mixed date formats and numbers stored as text, each with a count of how many rows are affected.
+- **Clean the data:** fill or remove missing values, remove duplicates, convert columns to numbers or dates, standardize text, and detect and treat outliers.
+- **Preview before applying:** every step shows exactly what it will change, and nothing changes until you confirm.
+- **Undo and review:** undo the last step, reset to the original file, or review the full history of changes.
+- **Compare** the original and cleaned data side by side: rows removed, values changed, missing values and quality checks before and after.
+- **Download** the cleaned data as CSV or Excel, the cleaning history, a reusable cleaning recipe, and data-quality and comparison reports.
 
-**Profiling and quality checks**
-- Dataset summary and a profile of each column: suggested type, missing values, distinct values, top values and formatting issues
-- Quality checks for missing values, null-like text (`NA`, `null`, `-`), duplicate rows, whitespace, inconsistent capitalization, mixed or ambiguous date formats, and numbers stored with symbols
-- Optional validity rules: a number range, a list of allowed values or a text pattern
+REFINE uses clear, rule-based cleaning steps. It does not use AI or machine learning, and it never changes data without your confirmation.
 
-**Cleaning**
-- Drop columns
-- Missing values: convert markers like `NA` to real missing values, drop rows or mostly empty columns, fill with a fixed value, mean, median, most frequent value or previous/next value, add indicator columns
-- Duplicates: find and remove, matching on all columns or chosen key columns, optionally ignoring case and extra spaces
-- Data types: convert text to whole numbers, decimals, true/false, dates or dates with times, with explicit rules for currency symbols, separators and date order
-- Text: trim whitespace, change case, collapse spaces, normalize Unicode, remove non-printing characters, find and replace, and map category variants (`NY`, `new york`) to one value
+## How it works
 
-**History**
-- Audit log of applied, undone and reset steps
-- Undo the last step or reset to the original file
-- A recipe of the applied steps that can be replayed on the original data to check it gives the same result
+1. **Upload** a dataset.
+2. **Review** its profile and quality checks.
+3. **Choose** a cleaning step and adjust its settings.
+4. **Preview** the result, then confirm to apply it.
+5. **Compare** the cleaned data with the original.
+6. **Download** the cleaned file and reports.
 
-## Dataset
+## Built with
 
-REFINE works with files you upload. Limits are 20 MB, 200,000 rows and 300 columns per file. Uploaded files stay in memory for the browser session and are not saved.
+Python, Streamlit, pandas, NumPy and Plotly.
 
-The repository includes a synthetic sample, [`sample_data/messy_customers.csv`](sample_data/messy_customers.csv) (500 rows, 9 columns), with planted problems: duplicate rows, missing-value markers, mixed date formats, numbers stored as text, inconsistent spellings and booleans, and a few outliers. Its [README](sample_data/README.md) lists them.
+## Run locally
 
-## Tech Stack
-
-- Python
-- Streamlit
-- pandas and PyArrow
-- openpyxl
-- Plotly
-- pytest
-
-## Run Locally
+Requires Python 3.13.
 
 ```bash
 cd project3-data-cleaning-engine
@@ -57,15 +46,26 @@ pip install -r requirements.txt
 streamlit run app_data_cleaner.py
 ```
 
-## Tests
+Then open the address Streamlit prints (usually http://localhost:8501) and click **Open sample dataset** to try it.
+
+## Testing
+
+REFINE has 1,029 automated tests covering file loading, quality checks, every cleaning operation, undo and history, the comparison, the downloads, the app's pages, and complete workflows from upload to export. To run them:
 
 ```bash
 pip install -r requirements-dev.txt
 pytest
 ```
 
-Run from the `project3-data-cleaning-engine` folder. The suite has 643 tests and has been run on pandas 2.2.3 and 3.0.6. It covers file parsing and encodings, profiling and quality checks, each cleaning operation, undo and replay, and the Streamlit pages.
+## Limitations
+
+- Files can be CSV or `.xlsx` (not the older `.xls`), up to 20 MB, 200,000 rows and 300 columns.
+- Uploaded files are kept in memory for your browser session only. They are not saved to disk or shared, and they are gone when you close the page.
+- CSV downloads store every value as text, so column types are not kept. Excel downloads keep types but are limited by Excel itself (for example, 15 significant digits). The Export page says when this affects your data.
+- Cleaning recipes can be downloaded and replayed in Python, but the app cannot import one yet.
 
 ## Documentation
 
-Parsing rules, quality check definitions, details of each cleaning operation, how undo and replay work, memory limits, benchmarks and known limitations are in [docs/TECHNICAL_DOCUMENTATION.md](docs/TECHNICAL_DOCUMENTATION.md).
+- [Technical documentation](docs/TECHNICAL_DOCUMENTATION.md): how each check and cleaning step works, file formats, limits and performance.
+- [Deployment guide](docs/DEPLOYMENT.md): setup, Streamlit Community Cloud settings and the manual testing checklist.
+- [Sample dataset](sample_data/README.md): the problems planted in the included sample file.

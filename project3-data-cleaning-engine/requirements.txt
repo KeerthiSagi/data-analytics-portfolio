@@ -1,7 +1,14 @@
 # REFINE runtime dependencies (used by Streamlit Community Cloud and local runs).
-streamlit>=1.65.0,<2
-pandas>=2.2.0,<4      # Engine code is tested on pandas 3; it avoids APIs removed in 4
-pyarrow>=14.0         # Arrow-backed text columns (also a Streamlit dependency)
-openpyxl>=3.1.0       # Reads .xlsx workbooks
-plotly>=5.22.0        # Profile & Quality charts (same floor as CAUSE)
-numpy>=1.26.0
+#
+# Upper bounds stop at the newest tested release line, so a deployment never
+# installs an untested major or minor version. Tested combinations (Python 3.13.3):
+#   pandas 2.2.3 / Streamlit 1.65.0 / PyArrow 25.0.1 / NumPy 2.5.4
+#   pandas 3.0.6 / Streamlit 1.65.0 / PyArrow 25.0.1 / NumPy 2.5.4
+#   pandas 3.1.1 / Streamlit 1.67.0 / PyArrow 26.0.1 / NumPy 2.5.5
+# Raise a bound only after the test suite passes on the newer version.
+streamlit>=1.65.0,<1.68   # Uses deferred downloads and width="stretch" (1.65+)
+pandas>=2.2.0,<3.2
+pyarrow>=14.0,<27         # Arrow-backed text columns (also a Streamlit dependency)
+openpyxl>=3.1.0,<3.2      # Reads .xlsx workbooks
+plotly>=5.22.0,<8         # Profile & Quality charts
+numpy>=1.26.0,<3
