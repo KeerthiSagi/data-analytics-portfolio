@@ -69,23 +69,25 @@ def _numeric_widgets(session, target: str) -> None:
     with a:
         st.selectbox("Thousands separator", list(THOUSANDS_LABELS), key=wkey(session, "ct_thousands"),
                      format_func=THOUSANDS_LABELS.get,
-                     help="Off by default. When chosen, groups must have exactly three digits: 1,25,000 is refused.")
+                     help="Off by default. When chosen, groups must have exactly three digits: 1,25,000 is refused.",
+                     persist_state="session")
     with b:
         st.selectbox("Decimal separator", list(DECIMAL_LABELS), key=wkey(session, "ct_decimal"),
-                     format_func=DECIMAL_LABELS.get)
+                     format_func=DECIMAL_LABELS.get, persist_state="session")
     a, b = st.columns(2)
     with a:
         st.checkbox("Read currency symbols ($ € £ ¥ ₹)", key=wkey(session, "ct_currency"),
-                    help="$1,250.50 reads as 1250.50. The symbol is not kept.")
+                    help="$1,250.50 reads as 1250.50. The symbol is not kept.", persist_state="session")
     with b:
         st.checkbox("Read (250.75) as negative", key=wkey(session, "ct_parens"),
-                    help="Accounting style: a value in parentheses is negative.")
+                    help="Accounting style: a value in parentheses is negative.", persist_state="session")
     st.selectbox("Percentages", list(PERCENT_LABELS), key=wkey(session, "ct_percent"),
-                 format_func=PERCENT_LABELS.get)
+                 format_func=PERCENT_LABELS.get, persist_state="session")
     if target == "integer":
         st.selectbox("Values with a fractional part (12.7)", list(FRACTION_LABELS), key=wkey(session, "ct_fraction"),
                      format_func=FRACTION_LABELS.get,
-                     help="Whole-number columns never truncate silently: 12.7 is refused unless you choose rounding.")
+                     help="Whole-number columns never truncate silently: 12.7 is refused unless you choose rounding.",
+                     persist_state="session")
     else:
         callout("About decimal numbers", DECIMAL_NOTE, "neutral")
 
@@ -95,31 +97,34 @@ def _date_widgets(session, target: str) -> None:
     formats = st.multiselect("Date formats in this column", list(DATE_FORMATS), key=wkey(session, "ct_formats"),
                              format_func=DATE_FORMAT_LABELS.get, placeholder="Choose one or more formats",
                              help="Year-first, one of month-first or day-first, and month names can be combined; "
-                                  "they never overlap. A custom format is used on its own.")
+                                  "they never overlap. A custom format is used on its own.", persist_state="session")
     if "custom" in formats:
         st.text_input("Custom format", key=wkey(session, "ct_custom"), placeholder="%d.%m.%Y %H:%M",
-                      help="Supported: %Y %m %d %H %M %S %f %z. Month names and 2-digit years are not.")
+                      help="Supported: %Y %m %d %H %M %S %f %z. Month names and 2-digit years are not.",
+                      persist_state="session")
     if target == "date":
         st.radio("Values with a time of day", list(TIME_LABELS), key=wkey(session, "ct_time"),
-                 format_func=TIME_LABELS.get)
+                 format_func=TIME_LABELS.get, persist_state="session")
     else:
         st.radio("Time zones", list(TZ_LABELS), key=wkey(session, "ct_tz"), format_func=TZ_LABELS.get,
                  help="With UTC, every value must include an offset such as Z or +02:00; values are converted "
-                      "to the same instant in UTC and the original offset is not kept.")
+                      "to the same instant in UTC and the original offset is not kept.", persist_state="session")
 
 
 def _boolean_widgets(session) -> None:
     st.multiselect("Mappings to use", list(BOOLEAN_PRESETS), key=wkey(session, "ct_presets"),
                    placeholder="For example: yes/no",
-                   help="Each pair maps the first value to true and the second to false.")
+                   help="Each pair maps the first value to true and the second to false.", persist_state="session")
     a, b = st.columns(2)
     with a:
         st.text_input("Other values meaning true", key=wkey(session, "ct_true"), placeholder="active, on",
-                      help="Separate values with commas.")
+                      help="Separate values with commas.", persist_state="session")
     with b:
-        st.text_input("Other values meaning false", key=wkey(session, "ct_false"), placeholder="inactive, off")
+        st.text_input("Other values meaning false", key=wkey(session, "ct_false"), placeholder="inactive, off",
+                      persist_state="session")
     st.checkbox("Match case exactly", key=wkey(session, "ct_bool_case"),
-                help="When off, 'Yes', 'YES' and 'yes' all match 'yes'. Surrounding spaces are always ignored.")
+                help="When off, 'Yes', 'YES' and 'yes' all match 'yes'. Surrounding spaces are always ignored.",
+                persist_state="session")
 
 
 def _split(text: str) -> list[str]:
@@ -232,9 +237,9 @@ def types_tab(ds, session, preview: Preview | None, profile=None) -> None:
         with st.expander("Current column types", expanded=False):
             _small_table(_types_table(session, data, profile), rows=10)
         columns = st.multiselect("Columns to convert", list(session.columns), key=wkey(session, "ct_columns"),
-                                 placeholder="Choose one or more columns of the same kind")
+                                 placeholder="Choose one or more columns of the same kind", persist_state="session")
         target = st.selectbox("Convert to", list(TARGETS), index=1, key=wkey(session, "ct_target"),
-                              format_func=TARGET_LABELS.get)
+                              format_func=TARGET_LABELS.get, persist_state="session")
         kinds = {column_kind(data[c].dtype) for c in columns}
         text_source = kinds == {"text"}
         if columns and not text_source:
@@ -245,17 +250,17 @@ def types_tab(ds, session, preview: Preview | None, profile=None) -> None:
                 _numeric_widgets(session, target)
             elif target == "integer":
                 st.selectbox("Values with a fractional part (12.7)", list(FRACTION_LABELS),
-                             key=wkey(session, "ct_fraction"), format_func=FRACTION_LABELS.get)
+                             key=wkey(session, "ct_fraction"), format_func=FRACTION_LABELS.get, persist_state="session")
         elif target in ("date", "datetime"):
             if text_source:
                 _date_widgets(session, target)
             elif target == "date":
                 st.radio("Values with a time of day", list(TIME_LABELS), key=wkey(session, "ct_time"),
-                         format_func=TIME_LABELS.get)
+                         format_func=TIME_LABELS.get, persist_state="session")
         elif target == "boolean":
             _boolean_widgets(session)
         st.radio("Values that cannot be converted", list(ON_ERROR_LABELS), key=wkey(session, "ct_on_error"),
-                 format_func=ON_ERROR_LABELS.get)
+                 format_func=ON_ERROR_LABELS.get, persist_state="session")
 
         def settings() -> dict:
             return conversion_settings(session)

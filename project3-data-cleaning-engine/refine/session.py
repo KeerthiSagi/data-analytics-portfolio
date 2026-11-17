@@ -488,6 +488,20 @@ class CleaningSession:
                    if ok else "Replaying the steps produced different data.")
         return ReplayCheck(ok, len(self._steps), self.fingerprint, replayed, message)
 
+    # ---- comparison (read-only) ------------------------------------
+
+    def compare(self, **reports):
+        """Compare the original table with the current one (see refine/compare.py).
+
+        Reads the stored tables without copying them and matches rows through
+        the session's row lineage. Changes nothing: not the tables, the
+        history, the version or the fingerprints. `reports` are passed on to
+        compare_datasets (cached profiles, quality reports, validity rules).
+        """
+        from refine.compare import compare_datasets
+
+        return compare_datasets(self._original.data, self._current.data, row_ids=self._current.row_ids, **reports)
+
     # ---- internals ---------------------------------------------------
 
     def _remember(self, k: int, state: _State) -> None:

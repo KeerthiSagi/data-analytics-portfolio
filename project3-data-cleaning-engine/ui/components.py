@@ -123,11 +123,6 @@ def show_flash() -> None:
     getattr(st, kind)(text, icon=FLASH_ICONS[kind])
 
 
-def planned_page(what: str) -> None:
-    """Placeholder for a page whose features arrive in a later phase."""
-    callout("Not available yet", what, "neutral")
-
-
 ABOUT = [
     ("Your data stays in this session",
      "Uploaded files are held in memory for your browser session only. They are not written to "

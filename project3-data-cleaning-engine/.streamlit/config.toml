@@ -35,6 +35,11 @@ maxUploadSize = 20
 
 [client]
 toolbarMode = "minimal"
+# An unexpected error shows its type and a generic message in the browser,
+# not a traceback with file paths. The full traceback still prints to the
+# server console (and the Streamlit Community Cloud logs). For local
+# debugging: streamlit run app_data_cleaner.py --client.showErrorDetails=full
+showErrorDetails = "type"
 
 [browser]
 gatherUsageStats = false

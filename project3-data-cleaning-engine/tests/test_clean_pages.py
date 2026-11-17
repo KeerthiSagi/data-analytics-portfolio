@@ -43,7 +43,7 @@ def apply_confirmed(at, cols):
 
 def test_clean_page_renders(clean):
     text = page_text(clean)
-    assert "Choose a step" in text and "Not available yet" in text      # Later steps still planned
+    assert "Choose a step" in text and "Not available yet" not in text  # Every tab is built (Phase 6)
     assert next(s for s in clean.selectbox if s.label == "Operation").value == "drop_columns"
     assert columns_widget(clean).options == ["customer_id", "full_name", "email", "signup_date", "country",
                                               "age", "annual_spend", "is_active", "segment"]

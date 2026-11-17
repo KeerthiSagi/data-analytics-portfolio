@@ -13,7 +13,7 @@ MAX_UPLOAD_MB must match `server.maxUploadSize` in .streamlit/config.toml
 from __future__ import annotations
 
 ENGINE_NAME = "REFINE"
-ENGINE_VERSION = "0.5.0"
+ENGINE_VERSION = "0.9.0"
 
 # ------------------------------------------------------------------
 # Supported formats

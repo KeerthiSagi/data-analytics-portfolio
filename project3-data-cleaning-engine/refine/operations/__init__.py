@@ -5,6 +5,7 @@ from refine.operations import missing_ops  # noqa: F401  (registers the missing-
 from refine.operations import duplicates_ops  # noqa: F401  (registers remove_duplicates)
 from refine.operations import convert_ops  # noqa: F401  (registers convert_type)
 from refine.operations import text_ops  # noqa: F401  (registers the text standardization operations)
+from refine.operations import outlier_ops  # noqa: F401  (registers treat_outliers)
 from refine.operations.base import (
     Impact,
     Operation,

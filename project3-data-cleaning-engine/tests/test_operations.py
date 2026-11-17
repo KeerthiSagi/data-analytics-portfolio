@@ -30,6 +30,8 @@ def test_registry():
         # Phase 5
         "convert_type", "trim_whitespace", "change_case", "collapse_whitespace", "normalize_unicode",
         "remove_control_characters", "find_replace", "map_categories",
+        # Phase 6
+        "treat_outliers",
     ]
     with pytest.raises(CleaningError) as err:
         get_operation("convert_types")          # Not an operation id
